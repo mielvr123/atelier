@@ -42,6 +42,8 @@ body.admin-bar .ld-header { top: 32px; }
   --line:   rgba(36,29,22,.14);
   --line-d: rgba(36,29,22,.22);        /* donkere haarlijn (op licht) */
   --line-light: rgba(244,242,237,.18); /* lichte haarlijn (op donker) */
+  --stitch: #d0beac;                   /* effen leder-stiksel (op licht) — overal gelijk */
+  --stitch-lt: #6e5c46;                /* stiksel op donkere blokken */
   font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
   background: var(--paper);
   color: var(--ink);
@@ -76,17 +78,27 @@ body.admin-bar .ld-header { top: 32px; }
   color: var(--tan);
 }
 
-/* stiksel-lijn (zadelsteek) */
+/* stiksel-lijn (zadelsteek) — effen leder-kleur, overal gelijk */
 .ld .ld-stitch {
+  --stitch-color: var(--stitch);
   border: none;
-  border-top: 2px dashed var(--line-d);
+  height: 2px;
+  background-image: repeating-linear-gradient(90deg,
+    var(--stitch-color) 0 7px, transparent 7px 15px);
   width: 88px;
   margin: 28px 0;
 }
+.ld .ld-stitch--dark { --stitch-color: var(--stitch); }
 .ld .ld-stitch--center { margin-inline: auto; }
 
-/* stiksel over de volledige paginabreedte */
-.ld .ld-sep { border-top: 2px dashed var(--line-d); }
+/* stiksel over de volledige paginabreedte, tussen secties
+   — zelfde dikte, kleur en patroon als de sectie-stiksels */
+.ld .ld-sep {
+  --stitch-color: var(--stitch);
+  height: 2px;
+  background-image: repeating-linear-gradient(90deg,
+    var(--stitch-color) 0 7px, transparent 7px 15px);
+}
 
 /* ── DRAAD & NAALD door het verhaal ─────────────── */
 .ld-story { position: relative; }
@@ -121,9 +133,16 @@ body.admin-bar .ld-header { top: 32px; }
   display: flex; align-items: center;
   background: rgba(244,242,237,.94);
   backdrop-filter: blur(6px);
-  border-bottom: 1px solid var(--line-d);
   font-family: 'Fraunces', Georgia, serif;
   color: var(--ink);
+}
+/* gestikte scheidingslijn onderaan de header */
+.ld-header::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background-image: repeating-linear-gradient(90deg,
+    var(--stitch) 0 7px, transparent 7px 15px);
 }
 .ld-header-inner {
   display: flex; align-items: baseline; justify-content: space-between;
@@ -218,28 +237,6 @@ body.admin-bar .ld-header { top: 32px; }
   .ld-hero-img { aspect-ratio: 4 / 4.4; }
 }
 
-/* ── CITAAT ─────────────────────────────────────── */
-.ld-quote {
-  padding: clamp(80px, 12vh, 150px) 0;
-  text-align: center;
-}
-.ld-quote blockquote {
-  font-size: clamp(26px, 4.2vw, 46px);
-  font-weight: 300;
-  font-style: italic;
-  line-height: 1.35;
-  max-width: 24ch;
-  margin: 34px auto 0;
-}
-.ld-quote blockquote strong { font-weight: 500; font-style: normal; color: var(--tan); }
-.ld-quote figcaption {
-  margin-top: 30px;
-  font-size: 13px;
-  letter-spacing: .26em;
-  text-transform: uppercase;
-  color: var(--smoke);
-}
-
 /* ── HOOFDSTUKKEN ───────────────────────────────── */
 .ld-ch {
   display: grid;
@@ -294,30 +291,6 @@ body.admin-bar .ld-header { top: 32px; }
   .ld-ch { grid-template-columns: 1fr; gap: 30px; }
   .ld-ch--flip .ld-ch-img-wrap { order: 0; }   /* op mobiel: tekst boven foto */
   .ld-ch-img { aspect-ratio: 4 / 3.4; }
-}
-
-/* ── SLOTQUOTE (vertragen) ──────────────────────── */
-.ld-slow {
-  background: var(--paper2);
-  padding: clamp(80px, 12vh, 150px) 0;
-  text-align: center;
-}
-.ld-slow p.q {
-  font-size: clamp(30px, 4.6vw, 56px);
-  font-weight: 300;
-  font-style: italic;
-  line-height: 1.25;
-  max-width: 20ch;
-  margin: 30px auto 0;
-}
-.ld-slow p.q strong { font-weight: 500; font-style: normal; color: var(--tan); }
-.ld-slow p.sub {
-  margin: 26px auto 0;
-  max-width: 52ch;
-  font-size: 16px;
-  font-weight: 300;
-  line-height: 1.8;
-  color: rgba(36,29,22,.7);
 }
 
 /* ── CTA (donker blok) ──────────────────────────── */
@@ -488,22 +461,6 @@ html { scroll-behavior: smooth; }
 
   <div class="ld-sep"></div>
 
-  <!-- ═══ CITAAT ═══ -->
-  <section class="ld-quote">
-    <div class="ld-w">
-      <figure>
-        <p class="ld-eyebrow ld-anim">In zijn eigen woorden</p>
-        <blockquote class="ld-anim ld-anim-d1">
-          &ldquo;Van vader op zoon heb ik altijd met leder gewerkt.
-          <strong>Ik maakte er mijn beroep van.</strong>&rdquo;
-        </blockquote>
-        <figcaption class="ld-anim ld-anim-d2">Luc Depuydt</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <div class="ld-sep"></div>
-
   <!-- ═══ HET VERHAAL: DRAAD + HOOFDSTUKKEN ═══ -->
   <div class="ld-story" id="ld-story">
 
@@ -658,18 +615,6 @@ html { scroll-behavior: smooth; }
   </div>
 
   </div><!-- /ld-story -->
-
-  <!-- ═══ SLOTQUOTE ═══ -->
-  <section class="ld-slow">
-    <div class="ld-w">
-      <p class="ld-eyebrow ld-anim">Op de plank in zijn atelier staat het zo</p>
-      <p class="q ld-anim ld-anim-d1">&ldquo;Vertragen <strong>gaat vanzelf.</strong>&rdquo;</p>
-      <p class="sub ld-anim ld-anim-d2">
-        Misschien is dat wel de kern van heel het verhaal: goed werk vraagt tijd,
-        en wie met leder werkt, leert vanzelf om die tijd te nemen.
-      </p>
-    </div>
-  </section>
 
   <!-- ═══ CTA ═══ -->
   <section class="ld-cta">
