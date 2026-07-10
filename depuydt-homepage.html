@@ -43,6 +43,8 @@ body.admin-bar .ld-header { top: 32px; }
   --line:   rgba(36,29,22,.14);
   --line-d: rgba(36,29,22,.22);        /* donkere haarlijn (op licht) */
   --line-light: rgba(239,233,221,.18); /* lichte haarlijn (op donker) */
+  --stitch: #d0beac;                   /* effen leder-stiksel (op licht) — overal gelijk */
+  --stitch-lt: #6e5c46;                /* stiksel op donkere blokken */
   font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
   background: var(--paper);
   color: var(--ink);
@@ -80,7 +82,7 @@ body.admin-bar .ld-header { top: 32px; }
 
 /* stiksel-lijn (zadelsteek) — steken dichter bij elkaar, in gedempt leder */
 .ld .ld-stitch {
-  --stitch-color: rgba(125,68,25,.3);
+  --stitch-color: var(--stitch);
   border: none;
   height: 2px;
   background-image: repeating-linear-gradient(90deg,
@@ -88,13 +90,13 @@ body.admin-bar .ld-header { top: 32px; }
   width: 88px;
   margin: 28px 0;
 }
-.ld .ld-stitch--dark { --stitch-color: rgba(125,68,25,.3); }
+.ld .ld-stitch--dark { --stitch-color: var(--stitch); }
 .ld .ld-stitch--center { margin-inline: auto; }
 
 /* stiksel over de volledige paginabreedte, tussen secties
    — zelfde dikte, kleur en patroon als de sectie-stiksels */
 .ld .ld-sep {
-  --stitch-color: rgba(125,68,25,.3);
+  --stitch-color: var(--stitch);
   height: 2px;
   background-image: repeating-linear-gradient(90deg,
     var(--stitch-color) 0 7px, transparent 7px 15px);
@@ -220,7 +222,7 @@ body.admin-bar .ld-header { top: 32px; }
   position: absolute; left: 0; right: 0; bottom: 0;
   height: 2px;
   background-image: repeating-linear-gradient(90deg,
-    rgba(125,68,25,.3) 0 7px, transparent 7px 15px);
+    var(--stitch) 0 7px, transparent 7px 15px);
 }
 .ld-header-inner {
   display: flex; align-items: baseline; justify-content: space-between;
@@ -442,7 +444,7 @@ body.admin-bar .ld-header { top: 32px; }
   text-align: center;
 }
 .ld-watou .ld-eyebrow { color: var(--tan-lt); }
-.ld-watou .ld-stitch { --stitch-color: rgba(189,136,80,.5); }
+.ld-watou .ld-stitch { --stitch-color: var(--stitch-lt); }
 .ld-watou h2 {
   font-size: clamp(30px, 4vw, 50px);
   font-weight: 400;
