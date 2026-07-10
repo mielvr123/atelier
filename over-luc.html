@@ -1,0 +1,886 @@
+<!-- ═══════════════════════════════════════════════════════════
+     AMBACHTELIJK LEDER ATELIER DEPUYDT — OVER LUC
+     Custom HTML-blok voor WordPress (Twenty Twenty-Five)
+     Prefix: .ld (zelfde stijl als de homepage)
+     ═══════════════════════════════════════════════════════════ -->
+
+<!-- Fix Twenty Twenty Five whitespace -->
+<style>
+/* TT25 FSE resets */
+.wp-site-blocks,
+.wp-site-blocks > *,
+.wp-block-post-content,
+.wp-block-post-content > *,
+.is-root-container,
+.is-root-container > *,
+.entry-content, .post-content, .page-content,
+.wp-block-group, article.post, article.page {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+/* Admin bar offset for fixed header */
+body.admin-bar .ld-header { top: 32px; }
+@media screen and (max-width: 782px) {
+  body.admin-bar .ld-header { top: 46px; }
+}
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
+
+<style>
+/* ── TOKENS ─────────────────────────────────────── */
+.ld {
+  --ink:    #241d16;          /* donkere inkt, warm */
+  --coal:   #2b2118;          /* donker accentblok / footer */
+  --paper:  #f4f2ed;          /* zacht gebroken wit (paginakleur) */
+  --paper2: #eae7e0;          /* iets dieper, voor afwisseling */
+  --tan:    #7d4419;          /* donker cognac leder (accent) */
+  --tan-lt: #bd8850;          /* licht leder, op donker */
+  --smoke:  #867d71;          /* gedempt grijsbruin */
+  --line:   rgba(36,29,22,.14);
+  --line-d: rgba(36,29,22,.22);        /* donkere haarlijn (op licht) */
+  --line-light: rgba(244,242,237,.18); /* lichte haarlijn (op donker) */
+  font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── RESET ──────────────────────────────────────── */
+.ld *, .ld *::before, .ld *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.ld a { text-decoration: none; color: inherit; }
+.ld img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.ld .ld-w  { max-width: 1200px; margin-inline: auto; padding-inline: clamp(20px, 4vw, 48px); }
+
+/* korrel-textuur over de hele pagina */
+.ld { position: relative; }
+.ld::after {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  opacity: .35;
+  transform: translateZ(0);  /* eigen composietlaag, geen repaint bij scroll */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.06'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* letterspaced label */
+.ld .ld-eyebrow {
+  font-family: Georgia, serif;
+  font-size: 12px;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--tan);
+}
+
+/* stiksel-lijn (zadelsteek) */
+.ld .ld-stitch {
+  border: none;
+  border-top: 2px dashed var(--line-d);
+  width: 88px;
+  margin: 28px 0;
+}
+.ld .ld-stitch--center { margin-inline: auto; }
+
+/* stiksel over de volledige paginabreedte */
+.ld .ld-sep { border-top: 2px dashed var(--line-d); }
+
+/* ── DRAAD & NAALD door het verhaal ─────────────── */
+.ld-story { position: relative; }
+.ld-story > .ld-w { position: relative; z-index: 1; }
+.ld-thread {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+}
+@media (max-width: 860px) {
+  .ld-thread #ld-thread-path { stroke: rgba(112,62,25,.42); }
+}
+
+/* ── ANIMATIES ──────────────────────────────────── */
+.ld-anim {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1);
+}
+.ld-anim.in { opacity: 1; transform: translateY(0); }
+.ld-anim-d1 { transition-delay: .12s; }
+.ld-anim-d2 { transition-delay: .24s; }
+.ld-anim-d3 { transition-delay: .38s; }
+
+/* ── HEADER ─────────────────────────────────────── */
+.ld-header {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 9999;
+  height: 68px;
+  display: flex; align-items: center;
+  background: rgba(244,242,237,.94);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line-d);
+  font-family: 'Fraunces', Georgia, serif;
+  color: var(--ink);
+}
+.ld-header-inner {
+  display: flex; align-items: baseline; justify-content: space-between;
+  width: 100%;
+}
+.ld-brand {
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: .06em;
+}
+.ld-brand span { color: var(--tan); }
+.ld-nav { display: flex; gap: 30px; }
+.ld-nav a {
+  font-size: 13px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: .78;
+  transition: opacity .25s, color .25s;
+}
+.ld-nav a:hover { opacity: 1; color: var(--tan); }
+.ld-nav a.active { opacity: 1; color: var(--tan); }
+@media (max-width: 720px) {
+  .ld-nav { gap: 18px; }
+  .ld-nav a { font-size: 11px; letter-spacing: .12em; }
+  .ld-brand { font-size: 15px; }
+}
+
+/* ── KNOPPEN ────────────────────────────────────── */
+.ld-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 14px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border: 1px solid var(--ink);
+  transition: background .25s, color .25s, border-color .25s;
+  cursor: pointer;
+}
+.ld .ld-btn--primary { background: var(--ink); color: var(--paper); }
+.ld .ld-btn--primary:hover { background: var(--tan); border-color: var(--tan); color: var(--paper); }
+.ld .ld-btn--ghost { background: transparent; color: var(--ink); }
+.ld .ld-btn--ghost:hover { background: var(--ink); color: var(--paper); }
+/* varianten op donkere achtergrond */
+.ld .ld-btn--paper { background: var(--paper); border-color: var(--paper); color: var(--ink); }
+.ld .ld-btn--paper:hover { background: var(--tan-lt); border-color: var(--tan-lt); color: var(--ink); }
+.ld .ld-btn--ghost-light { background: transparent; border-color: var(--line-light); color: var(--paper); }
+.ld .ld-btn--ghost-light:hover { background: var(--paper); border-color: var(--paper); color: var(--ink); }
+
+/* ── HERO ───────────────────────────────────────── */
+.ld-hero {
+  padding-top: calc(68px + clamp(40px, 6vh, 72px));
+  padding-bottom: clamp(30px, 5vh, 56px);
+}
+.ld-hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: clamp(36px, 6vw, 90px);
+  align-items: center;
+}
+.ld-hero h1 {
+  font-size: clamp(38px, 5.2vw, 70px);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: .01em;
+  margin-top: 18px;
+}
+.ld-hero h1 em { font-style: italic; font-weight: 300; color: var(--tan); }
+.ld-hero-sub {
+  margin-top: 22px;
+  font-size: clamp(16px, 1.7vw, 19px);
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(36,29,22,.72);
+  max-width: 46ch;
+}
+.ld-hero-img {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+.ld-hero-img img { filter: grayscale(1) contrast(1.04); }
+.ld-hero-cap {
+  margin-top: 12px;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--smoke);
+  text-align: right;
+}
+@media (max-width: 860px) {
+  .ld-hero-grid { grid-template-columns: 1fr; gap: 30px; }
+  .ld-hero-img { aspect-ratio: 4 / 4.4; }
+}
+
+/* ── CITAAT ─────────────────────────────────────── */
+.ld-quote {
+  padding: clamp(80px, 12vh, 150px) 0;
+  text-align: center;
+}
+.ld-quote blockquote {
+  font-size: clamp(26px, 4.2vw, 46px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.35;
+  max-width: 24ch;
+  margin: 34px auto 0;
+}
+.ld-quote blockquote strong { font-weight: 500; font-style: normal; color: var(--tan); }
+.ld-quote figcaption {
+  margin-top: 30px;
+  font-size: 13px;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--smoke);
+}
+
+/* ── HOOFDSTUKKEN ───────────────────────────────── */
+.ld-ch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(36px, 6vw, 90px);
+  align-items: center;
+  padding: clamp(56px, 8vh, 110px) 0;
+}
+.ld-ch--flip .ld-ch-img-wrap { order: -1; }   /* foto links, tekst rechts */
+.ld-ch-num {
+  font-size: clamp(60px, 7vw, 96px);
+  font-weight: 300;
+  font-style: italic;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(125,68,25,.55);
+  line-height: 1;
+}
+.ld-ch h2 {
+  font-size: clamp(30px, 3.6vw, 46px);
+  font-weight: 400;
+  line-height: 1.12;
+  margin-top: 18px;
+}
+.ld-ch h2 em { font-style: italic; color: var(--tan); font-weight: 300; }
+.ld-ch p {
+  margin-top: 22px;
+  font-size: 16.5px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(36,29,22,.78);
+  max-width: 52ch;
+}
+.ld-ch p strong { font-weight: 500; color: var(--ink); }
+.ld-ch-img {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+.ld-ch-img img {
+  filter: grayscale(1) contrast(1.04);
+  transition: transform 1.4s cubic-bezier(.22,1,.36,1);
+}
+.ld-ch-img:hover img { transform: scale(1.035); }
+.ld-ch-caption {
+  margin-top: 14px;
+  font-size: 12px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--smoke);
+}
+@media (max-width: 860px) {
+  .ld-ch { grid-template-columns: 1fr; gap: 30px; }
+  .ld-ch--flip .ld-ch-img-wrap { order: 0; }   /* op mobiel: tekst boven foto */
+  .ld-ch-img { aspect-ratio: 4 / 3.4; }
+}
+
+/* ── SLOTQUOTE (vertragen) ──────────────────────── */
+.ld-slow {
+  background: var(--paper2);
+  padding: clamp(80px, 12vh, 150px) 0;
+  text-align: center;
+}
+.ld-slow p.q {
+  font-size: clamp(30px, 4.6vw, 56px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.25;
+  max-width: 20ch;
+  margin: 30px auto 0;
+}
+.ld-slow p.q strong { font-weight: 500; font-style: normal; color: var(--tan); }
+.ld-slow p.sub {
+  margin: 26px auto 0;
+  max-width: 52ch;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(36,29,22,.7);
+}
+
+/* ── CTA (donker blok) ──────────────────────────── */
+.ld-cta {
+  background: var(--coal);
+  color: var(--paper);
+  padding: clamp(80px, 12vh, 150px) 0;
+  text-align: center;
+}
+.ld-cta .ld-eyebrow { color: var(--tan-lt); }
+.ld-cta h2 {
+  font-size: clamp(30px, 4vw, 50px);
+  font-weight: 400;
+  line-height: 1.15;
+  max-width: 24ch;
+  margin: 20px auto 0;
+}
+.ld-cta h2 em { font-style: italic; font-weight: 300; color: var(--tan-lt); }
+.ld-cta p {
+  margin: 24px auto 0;
+  max-width: 54ch;
+  font-size: 16.5px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(244,242,237,.82);
+}
+.ld-cta-actions {
+  display: flex; flex-wrap: wrap; gap: 14px;
+  justify-content: center;
+  margin-top: 34px;
+}
+
+/* ── FOOTER (donker) ────────────────────────────── */
+.ld-footer {
+  background: var(--coal);
+  color: var(--paper);
+  border-top: 2px dashed var(--line-light);
+  padding: clamp(56px, 8vh, 90px) 0 40px;
+}
+.ld-footer .ld-brand span { color: var(--tan-lt); }
+.ld-footer-top {
+  display: grid;
+  grid-template-columns: 1.1fr 2fr;
+  gap: clamp(36px, 5vw, 80px);
+  align-items: start;
+}
+.ld-footer-brand .ld-brand { font-size: 22px; }
+.ld-footer-brand p {
+  margin-top: 14px;
+  font-size: 14.5px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(244,242,237,.66);
+  max-width: 30ch;
+}
+.ld-footer-cols {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px clamp(24px, 3vw, 50px);
+}
+.ld-footer-cols .k {
+  display: block;
+  font-size: 11px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--smoke);
+}
+.ld-footer-cols .v {
+  display: block;
+  margin-top: 9px;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--paper);
+}
+.ld-footer-cols a.v { transition: color .25s; }
+.ld-footer-cols a.v:hover { color: var(--tan-lt); }
+.ld-footer-bottom {
+  margin-top: clamp(44px, 6vh, 64px);
+  padding-top: 26px;
+  border-top: 1px solid var(--line-light);
+  display: flex; flex-wrap: wrap; gap: 12px;
+  justify-content: space-between;
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--smoke);
+}
+@media (max-width: 860px) {
+  .ld-footer-top { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .ld-footer-cols { grid-template-columns: 1fr; }
+}
+
+/* ── LIGHTBOX ───────────────────────────────────── */
+.ld-hero-img img,
+.ld-ch-img img { cursor: zoom-in; }
+.ld-lb {
+  position: fixed; inset: 0;
+  z-index: 10000;
+  display: none;
+  align-items: center; justify-content: center;
+  background: rgba(24,18,12,.93);
+  padding: 4vmin;
+  opacity: 0;
+  transition: opacity .28s ease;
+}
+.ld-lb.open { display: flex; }
+.ld-lb.visible { opacity: 1; }
+.ld-lb img {
+  max-width: 92vw; max-height: 88vh;
+  width: auto; height: auto;
+  object-fit: contain;
+  box-shadow: 0 30px 80px rgba(0,0,0,.5);
+}
+.ld-lb-close {
+  position: absolute; top: 18px; right: 22px;
+  width: 44px; height: 44px;
+  background: none; border: none;
+  color: rgba(244,242,237,.85);
+  font-size: 30px; line-height: 1;
+  font-family: Georgia, serif;
+  cursor: pointer;
+  transition: color .25s;
+}
+.ld-lb-close:hover { color: #fff; }
+
+/* anker-offset voor vaste header */
+.ld [id] { scroll-margin-top: 84px; }
+html { scroll-behavior: smooth; }
+</style>
+
+<div class="ld">
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="ld-header" id="ld-header">
+    <div class="ld-w ld-header-inner">
+      <a href="/" class="ld-brand">Atelier <span>Depuydt</span></a>
+      <nav class="ld-nav">
+        <a href="/over-luc/" class="active">Over Luc</a>
+        <a href="/galerij/">Galerij</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="ld-hero" id="ld-top">
+    <div class="ld-w ld-hero-grid">
+      <div>
+        <p class="ld-eyebrow ld-anim in">Over Luc</p>
+        <h1 class="ld-anim in ld-anim-d1">Een leven <em>in leder.</em></h1>
+        <p class="ld-hero-sub ld-anim in ld-anim-d2">
+          Luc Depuydt is 76 en werkt nog elke week met zijn handen in het leder.
+          Niet uit gewoonte, maar uit liefde voor een stiel die hij van thuis
+          meekreeg en nooit meer heeft losgelaten. Dit is zijn verhaal.
+        </p>
+      </div>
+      <div class="ld-anim in ld-anim-d2">
+        <div class="ld-hero-img">
+          <img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4502-scaled.jpg" alt="Luc Depuydt in zijn lederatelier">
+        </div>
+        <p class="ld-hero-cap">Luc Depuydt, in zijn atelier</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="ld-sep"></div>
+
+  <!-- ═══ CITAAT ═══ -->
+  <section class="ld-quote">
+    <div class="ld-w">
+      <figure>
+        <p class="ld-eyebrow ld-anim">In zijn eigen woorden</p>
+        <blockquote class="ld-anim ld-anim-d1">
+          &ldquo;Van vader op zoon heb ik altijd met leder gewerkt.
+          <strong>Ik maakte er mijn beroep van.</strong>&rdquo;
+        </blockquote>
+        <figcaption class="ld-anim ld-anim-d2">Luc Depuydt</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="ld-sep"></div>
+
+  <!-- ═══ HET VERHAAL: DRAAD + HOOFDSTUKKEN ═══ -->
+  <div class="ld-story" id="ld-story">
+
+    <svg class="ld-thread" id="ld-thread" aria-hidden="true">
+      <defs>
+        <mask id="ldThreadMask">
+          <path id="ld-thread-reveal" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+        </mask>
+      </defs>
+      <path id="ld-thread-path" fill="none" stroke="rgba(112,62,25,.6)" stroke-width="2" stroke-dasharray="9 7" mask="url(#ldThreadMask)"/>
+      <g id="ld-needle" opacity="0">
+        <path d="M0 0 L-18 3.1 L-58 3.4 Q-72 3.4 -72 0 Q-72 -3.4 -58 -3.4 L-18 -3.1 Z" fill="#5a4632"/>
+        <ellipse cx="-60" cy="0" rx="5.5" ry="1.7" fill="#f4f2ed"/>
+      </g>
+    </svg>
+
+  <!-- ═══ HOOFDSTUK I — DE PAPLEPEL ═══ -->
+  <div class="ld-w">
+    <section class="ld-ch">
+      <div class="ld-ch-txt ld-anim">
+        <div class="ld-ch-num">I.</div>
+        <h2>Met de paplepel <em>ingegoten</em></h2>
+        <hr class="ld-stitch">
+        <p>
+          Luc groeide op tussen de huiden. Thuis werd met leder gewerkt, en als
+          kind leerde hij van zijn vader hoe je een huid leest: waar ze sterk is,
+          waar ze soepel is, en waar ze mooi wordt met de jaren.
+        </p>
+        <p>
+          Wat voor anderen een ambacht is dat je moet leren, was voor hem gewoon
+          thuis. <strong>Van vader op zoon</strong>, zoals dat vroeger ging. Het is de rode
+          draad die door heel zijn leven loopt.
+        </p>
+      </div>
+      <div class="ld-ch-img-wrap ld-anim ld-anim-d1">
+        <div class="ld-ch-img">
+          <img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4594-scaled.jpg" alt="Handen aan het werk met leder" loading="lazy">
+        </div>
+        <p class="ld-ch-caption">De stiel, van thuis meegekregen</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══ HOOFDSTUK II — OFF WAY ═══ -->
+  <div class="ld-w">
+    <section class="ld-ch ld-ch--flip">
+      <div class="ld-ch-txt ld-anim">
+        <div class="ld-ch-num">II.</div>
+        <h2>De jaren van <em>Off Way</em></h2>
+        <hr class="ld-stitch">
+        <p>
+          Van die liefde maakte Luc zijn beroep. Samen met zijn partner
+          Bruni Carpentier runde hij jarenlang het lederbedrijf <strong>Off Way</strong>
+          in de Warandestraat: geen massaproductie, maar exclusieve, handgemaakte
+          handtassen en unieke kleinmeubels in leder.
+        </p>
+        <p>
+          Binnen Off Way draaide alles om absolute topkwaliteit. Elk stuk kreeg
+          de tijd die het nodig had, en verliet pas het atelier als het helemaal
+          juist zat. Die lat is nooit meer gezakt.
+        </p>
+      </div>
+      <div class="ld-ch-img-wrap ld-anim ld-anim-d1">
+        <div class="ld-ch-img">
+          <img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4181-scaled.jpg" alt="Luc Depuydt aan zijn werkbank" loading="lazy">
+        </div>
+        <p class="ld-ch-caption">Topkwaliteit, stuk voor stuk</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══ HOOFDSTUK III — HET BLOED KRUIPT ═══ -->
+  <div class="ld-w">
+    <section class="ld-ch">
+      <div class="ld-ch-txt ld-anim">
+        <div class="ld-ch-num">III.</div>
+        <h2>Het bloed kruipt <em>waar het niet gaan kan</em></h2>
+        <hr class="ld-stitch">
+        <p>
+          Off Way bestaat in zijn vroegere vorm niet meer. Maar wie dacht dat
+          Luc het leder zou loslaten, kent hem niet. Onder de noemer
+          <strong>Ambachtelijk Leder Atelier</strong> werkte hij gewoon verder, op zijn
+          eigen tempo en op zijn eigen manier.
+        </p>
+        <p>
+          Nog altijd exact zoals vroeger: met de hand, met traditioneel
+          gereedschap en met een diep respect voor de natuurlijke textuur van
+          de huiden.
+        </p>
+      </div>
+      <div class="ld-ch-img-wrap ld-anim ld-anim-d1">
+        <div class="ld-ch-img">
+          <img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4309-scaled.jpg" alt="Traditioneel handgereedschap in het atelier" loading="lazy">
+        </div>
+        <p class="ld-ch-caption">Traditioneel gereedschap, geen machines</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══ HOOFDSTUK IV — WATOU ═══ -->
+  <div class="ld-w">
+    <section class="ld-ch ld-ch--flip">
+      <div class="ld-ch-txt ld-anim">
+        <div class="ld-ch-num">IV.</div>
+        <h2>Tussen de kunstenaars <em>van Watou</em></h2>
+        <hr class="ld-stitch">
+        <p>
+          Tijdens de zomermaanden vind je Luc in het kunstdorp Watou. Daar stelt
+          hij zijn creaties tentoon naast het werk van bevriende kunstenaars,
+          zoals schilder Bruno Deman en kunstenaar Masoud Razavi. Een
+          <strong>ode aan het ambacht</strong>, noemen ze het.
+        </p>
+        <p>
+          Geen winkel en geen vitrine, maar een plek waar mensen binnenlopen,
+          het werk vastpakken en een gesprek beginnen. Daar is het atelier voor.
+        </p>
+      </div>
+      <div class="ld-ch-img-wrap ld-anim ld-anim-d1">
+        <div class="ld-ch-img">
+          <img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4350-scaled.jpg" alt="Het atelier tijdens de kunstzomer" loading="lazy">
+        </div>
+        <p class="ld-ch-caption">De kunstzomer, elk jaar opnieuw</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══ HOOFDSTUK V — VANDAAG ═══ -->
+  <div class="ld-w">
+    <section class="ld-ch">
+      <div class="ld-ch-txt ld-anim">
+        <div class="ld-ch-num">V.</div>
+        <h2>Vandaag, <em>op zijn 76ste</em></h2>
+        <hr class="ld-stitch">
+        <p>
+          Vandaag staat Luc vooral in de weekends in zijn atelier. Geen haast,
+          geen deadlines: een huid, zijn gereedschap en de tijd die een stuk
+          nodig heeft. Wie iets op maat wil, komt langs, en samen wordt het
+          uitgetekend.
+        </p>
+        <p>
+          Voor Luc is leerbewerken geen werk. Het is <strong>een manier van
+          leven</strong> geworden, en wie het atelier binnenstapt, voelt dat meteen.
+        </p>
+      </div>
+      <div class="ld-ch-img-wrap ld-anim ld-anim-d1">
+        <div class="ld-ch-img">
+          <img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4458-scaled.jpg" alt="Luc Depuydt aan het werk in zijn atelier vandaag" loading="lazy">
+        </div>
+        <p class="ld-ch-caption">Het atelier, vooral in de weekends</p>
+      </div>
+    </section>
+  </div>
+
+  </div><!-- /ld-story -->
+
+  <!-- ═══ SLOTQUOTE ═══ -->
+  <section class="ld-slow">
+    <div class="ld-w">
+      <p class="ld-eyebrow ld-anim">Op de plank in zijn atelier staat het zo</p>
+      <p class="q ld-anim ld-anim-d1">&ldquo;Vertragen <strong>gaat vanzelf.</strong>&rdquo;</p>
+      <p class="sub ld-anim ld-anim-d2">
+        Misschien is dat wel de kern van heel het verhaal: goed werk vraagt tijd,
+        en wie met leder werkt, leert vanzelf om die tijd te nemen.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="ld-cta">
+    <div class="ld-w">
+      <p class="ld-eyebrow ld-anim">Maak kennis</p>
+      <h2 class="ld-anim ld-anim-d1">Kom eens langs, <em>of stuur een berichtje</em></h2>
+      <p class="ld-anim ld-anim-d2">
+        Iets op maat in gedachten, een vraag over het werk of gewoon zin om het
+        atelier eens te zien? Luc hoort het graag.
+      </p>
+      <div class="ld-cta-actions ld-anim ld-anim-d2">
+        <a class="ld-btn ld-btn--paper" href="/contact/">Contact</a>
+        <a class="ld-btn ld-btn--ghost-light" href="/">Terug naar het atelier</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="ld-footer">
+    <div class="ld-w">
+      <div class="ld-footer-top">
+        <div class="ld-footer-brand">
+          <span class="ld-brand">Atelier <span>Depuydt</span></span>
+          <p>Ambachtelijk Leder Atelier. Handgemaakt lederwerk op maat, in West-Vlaanderen.</p>
+        </div>
+        <div class="ld-footer-cols">
+          <div>
+            <span class="k">Telefoon</span>
+            <a class="v" href="tel:+32478444589">+32&nbsp;478&nbsp;44&nbsp;45&nbsp;89</a>
+          </div>
+          <div>
+            <span class="k">E-mail</span>
+            <a class="v" href="mailto:luc.depuydt1@gmail.com">luc.depuydt1@gmail.com</a>
+          </div>
+          <div>
+            <span class="k">Atelier</span>
+            <span class="v">Watou, open tijdens de zomermaanden en op afspraak</span>
+          </div>
+          <div>
+            <span class="k">Volg het atelier</span>
+            <a class="v" href="https://www.facebook.com/p/Ambachtelijk-Leder-Atelier-100063621544625/" target="_blank" rel="noopener">Facebook</a>
+          </div>
+        </div>
+      </div>
+      <div class="ld-footer-bottom">
+        <span>&copy; <span id="ld-year">2026</span> Ambachtelijk Leder Atelier Depuydt</span>
+        <span>Handgemaakt in West-Vlaanderen</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══ LIGHTBOX ═══ -->
+  <div class="ld-lb" id="ld-lb" role="dialog" aria-modal="true" aria-label="Afbeelding vergroot bekijken">
+    <img id="ld-lb-img" src="" alt="">
+    <button class="ld-lb-close" id="ld-lb-close" type="button" aria-label="Sluiten">&times;</button>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  // Scroll-animaties
+  var anims = document.querySelectorAll('.ld-anim');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  anims.forEach(function(el){ io.observe(el); });
+
+  // Jaartal
+  document.getElementById('ld-year').textContent = new Date().getFullYear();
+
+  // ── Lightbox ──
+  (function(){
+    var lb      = document.getElementById('ld-lb');
+    var lbImg   = document.getElementById('ld-lb-img');
+    var lbClose = document.getElementById('ld-lb-close');
+    if (!lb) return;
+    function lbOpen(src, alt){
+      lbImg.src = src; lbImg.alt = alt || '';
+      lb.classList.add('open');
+      requestAnimationFrame(function(){ lb.classList.add('visible'); });
+      document.body.style.overflow = 'hidden';
+    }
+    function lbShut(){
+      lb.classList.remove('visible');
+      setTimeout(function(){ lb.classList.remove('open'); lbImg.src = ''; }, 280);
+      document.body.style.overflow = '';
+    }
+    document.querySelectorAll('.ld-hero-img img, .ld-ch-img img').forEach(function(img){
+      img.addEventListener('click', function(){ lbOpen(img.src, img.alt); });
+    });
+    lb.addEventListener('click', function(e){ if (e.target === lb) lbShut(); });
+    lbClose.addEventListener('click', lbShut);
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && lb.classList.contains('open')) lbShut(); });
+    // veegbeweging naar beneden om te sluiten (gsm)
+    var touchY = 0;
+    lb.addEventListener('touchstart', function(e){ touchY = e.touches[0].clientY; }, { passive: true });
+    lb.addEventListener('touchend', function(e){
+      if (e.changedTouches[0].clientY - touchY > 60) lbShut();
+    }, { passive: true });
+  })();
+
+  // ── Draad & naald door het verhaal ──
+  var story    = document.getElementById('ld-story');
+  var threadEl = document.getElementById('ld-thread');
+  var thread   = document.getElementById('ld-thread-path');
+  var reveal   = document.getElementById('ld-thread-reveal');
+  var needle   = document.getElementById('ld-needle');
+  var threadLen = 0;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // vloeiende curve (catmull-rom naar bezier) door een reeks punten
+  function smoothPath(pts) {
+    var d = 'M' + pts[0][0] + ',' + pts[0][1];
+    for (var i = 0; i < pts.length - 1; i++) {
+      var p0 = pts[Math.max(0, i - 1)], p1 = pts[i], p2 = pts[i + 1], p3 = pts[Math.min(pts.length - 1, i + 2)];
+      var c1x = p1[0] + (p2[0] - p0[0]) / 6, c1y = p1[1] + (p2[1] - p0[1]) / 6;
+      var c2x = p2[0] - (p3[0] - p1[0]) / 6, c2y = p2[1] - (p3[1] - p1[1]) / 6;
+      d += ' C' + c1x + ',' + c1y + ' ' + c2x + ',' + c2y + ' ' + p2[0] + ',' + p2[1];
+    }
+    return d;
+  }
+
+  function buildThread() {
+    if (!story || !thread) return;
+    var w = story.clientWidth, h = story.clientHeight;
+    if (!w || !h) return;
+    threadEl.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    // slingerend van boven naar onder, langs de vijf hoofdstukken;
+    // op smalle schermen breder uitslingeren zodat de draad schuin kruist
+    var pts = w < 700 ? [
+      [w * .50, 0],
+      [w * .14, h * .10],
+      [w * .86, h * .22],
+      [w * .15, h * .36],
+      [w * .85, h * .50],
+      [w * .16, h * .64],
+      [w * .84, h * .78],
+      [w * .18, h * .90],
+      [w * .55, h * .98],
+      [w * .50, h]
+    ] : [
+      [w * .50, 0],
+      [w * .41, h * .09],
+      [w * .59, h * .20],
+      [w * .42, h * .32],
+      [w * .58, h * .44],
+      [w * .41, h * .56],
+      [w * .59, h * .68],
+      [w * .42, h * .80],
+      [w * .56, h * .92],
+      [w * .50, h]
+    ];
+    var d = smoothPath(pts);
+    thread.setAttribute('d', d);
+    reveal.setAttribute('d', d);
+    threadLen = reveal.getTotalLength();
+    reveal.style.strokeDasharray = threadLen + ' ' + threadLen;
+    updateThread();
+  }
+
+  var lastStep = -1;
+  function updateThread() {
+    if (!threadLen) return;
+    var r = story.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var p = (vh * .78 - r.top) / r.height;
+    p = Math.max(0, Math.min(1, p));
+    if (reduceMotion) p = 1;
+    // alleen hertekenen als de voortgang merkbaar veranderd is
+    var step = Math.round(p * 400);
+    if (step === lastStep) return;
+    lastStep = step;
+    p = step / 400;
+    reveal.style.strokeDashoffset = threadLen * (1 - p);
+    if (p > 0.01 && p < 0.995) {
+      var pt  = reveal.getPointAtLength(threadLen * p);
+      var pt2 = reveal.getPointAtLength(Math.max(0, threadLen * p - 2));
+      var ang = Math.atan2(pt.y - pt2.y, pt.x - pt2.x) * 180 / Math.PI;
+      var ns = story.clientWidth < 700 ? .8 : 1;
+      needle.setAttribute('transform', 'translate(' + pt.x + ',' + pt.y + ') rotate(' + ang + ') scale(' + ns + ')');
+      needle.setAttribute('opacity', '1');
+    } else {
+      needle.setAttribute('opacity', '0');
+    }
+  }
+
+  // draad enkel bijwerken zolang het verhaal (ruim) in beeld is
+  var storyVisible = true;
+  if ('IntersectionObserver' in window) {
+    storyVisible = false;
+    new IntersectionObserver(function (entries) {
+      storyVisible = entries[0].isIntersecting;
+    }, { rootMargin: '30% 0px 30% 0px' }).observe(story);
+  }
+
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (!storyVisible || ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { updateThread(); ticking = false; });
+  }, { passive: true });
+
+  if (window.ResizeObserver) {
+    new ResizeObserver(function () { buildThread(); }).observe(story);
+  } else {
+    window.addEventListener('resize', buildThread);
+  }
+  window.addEventListener('load', buildThread);
+  buildThread();
+})();
+</script>

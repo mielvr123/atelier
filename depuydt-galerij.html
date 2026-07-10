@@ -1,0 +1,382 @@
+<!-- ═══════════════════════════════════════════════════════════
+     AMBACHTELIJK LEDER ATELIER DEPUYDT — GALERIJ
+     Custom HTML-blok voor WordPress (Twenty Twenty-Five)
+     Prefix: .ld (zelfde stijl als de homepage)
+     ═══════════════════════════════════════════════════════════ -->
+
+<!-- Fix Twenty Twenty Five whitespace -->
+<style>
+.wp-site-blocks,
+.wp-site-blocks > *,
+.wp-block-post-content,
+.wp-block-post-content > *,
+.is-root-container,
+.is-root-container > *,
+.entry-content, .post-content, .page-content,
+.wp-block-group, article.post, article.page {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+body.admin-bar .ld-header { top: 32px; }
+@media screen and (max-width: 782px) {
+  body.admin-bar .ld-header { top: 46px; }
+}
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
+
+<style>
+/* ── TOKENS ─────────────────────────────────────── */
+.ld {
+  --ink:    #241d16;
+  --coal:   #2b2118;
+  --paper:  #f4f2ed;
+  --paper2: #eae7e0;
+  --tan:    #7d4419;
+  --tan-lt: #bd8850;
+  --smoke:  #867d71;
+  --line:   rgba(36,29,22,.14);
+  --line-d: rgba(36,29,22,.22);
+  --line-light: rgba(244,242,237,.18);
+  font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+.ld *, .ld *::before, .ld *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.ld a { text-decoration: none; color: inherit; }
+.ld img { display: block; width: 100%; }
+.ld .ld-w { max-width: 1400px; margin-inline: auto; padding-inline: clamp(16px, 3vw, 40px); }
+
+/* korrel-textuur */
+.ld { position: relative; }
+.ld::after {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  opacity: .35;
+  transform: translateZ(0);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.06'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── ANIMATIES ──────────────────────────────────── */
+.ld-anim {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);
+}
+.ld-anim.in { opacity: 1; transform: translateY(0); }
+
+/* ── HEADER ─────────────────────────────────────── */
+.ld-header {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 9999;
+  height: 68px;
+  display: flex; align-items: center;
+  background: rgba(244,242,237,.94);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line-d);
+  font-family: 'Fraunces', Georgia, serif;
+  color: var(--ink);
+}
+.ld-header-inner {
+  display: flex; align-items: baseline; justify-content: space-between;
+  width: 100%;
+  max-width: 1200px; margin-inline: auto; padding-inline: clamp(20px, 4vw, 48px);
+}
+.ld-brand { font-size: 17px; font-weight: 500; letter-spacing: .06em; }
+.ld-brand span { color: var(--tan); }
+.ld-nav { display: flex; gap: 30px; }
+.ld-nav a {
+  font-size: 13px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--ink); opacity: .78;
+  transition: opacity .25s, color .25s;
+}
+.ld-nav a:hover { opacity: 1; color: var(--tan); }
+.ld-nav a.active { opacity: 1; color: var(--tan); }
+@media (max-width: 720px) {
+  .ld-nav { gap: 18px; }
+  .ld-nav a { font-size: 11px; letter-spacing: .12em; }
+  .ld-brand { font-size: 15px; }
+}
+
+/* ── GALERIJ (masonry) ──────────────────────────── */
+.ld-gal {
+  padding-top: calc(68px + clamp(24px, 4vh, 48px));
+  padding-bottom: clamp(40px, 7vh, 90px);
+}
+/* Strak grid met vaste vakken: elke rij sluit vlak af, geen gaten.
+   Foto's vullen hun vak (object-fit: cover); volledig beeld in de lightbox. */
+.ld-gal-masonry {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: clamp(240px, 26vw, 380px);
+  grid-auto-flow: dense;
+  gap: clamp(12px, 1.4vw, 20px);
+}
+.ld-gal-it {
+  overflow: hidden;
+  background: var(--paper2);
+}
+.ld-gal-it--tall { grid-row: span 2; }
+.ld-gal-it--wide { grid-column: span 2; }
+.ld-gal-it img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  cursor: zoom-in;
+  transition: transform 1.2s cubic-bezier(.22,1,.36,1), opacity .5s;
+}
+.ld-gal-it:hover img { transform: scale(1.035); }
+@media (max-width: 1100px) {
+  .ld-gal-masonry {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: clamp(220px, 44vw, 420px);
+  }
+}
+
+/* ── FOOTER ─────────────────────────────────────── */
+.ld-footer {
+  background: var(--coal);
+  color: var(--paper);
+  border-top: 2px dashed var(--line-light);
+  padding: clamp(56px, 8vh, 90px) 0 40px;
+}
+.ld-footer .ld-w { max-width: 1200px; padding-inline: clamp(20px, 4vw, 48px); }
+.ld-footer .ld-brand span { color: var(--tan-lt); }
+.ld-footer-top {
+  display: grid;
+  grid-template-columns: 1.1fr 2fr;
+  gap: clamp(36px, 5vw, 80px);
+  align-items: start;
+}
+.ld-footer-brand .ld-brand { font-size: 22px; }
+.ld-footer-brand p {
+  margin-top: 14px;
+  font-size: 14.5px; font-weight: 300; line-height: 1.7;
+  color: rgba(244,242,237,.66); max-width: 30ch;
+}
+.ld-footer-cols {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 30px clamp(24px, 3vw, 50px);
+}
+.ld-footer-cols .k {
+  display: block; font-size: 11px; letter-spacing: .28em;
+  text-transform: uppercase; color: var(--smoke);
+}
+.ld-footer-cols .v {
+  display: block; margin-top: 9px;
+  font-size: 17px; font-weight: 300; line-height: 1.5; color: var(--paper);
+}
+.ld-footer-cols a.v { transition: color .25s; }
+.ld-footer-cols a.v:hover { color: var(--tan-lt); }
+.ld-footer-bottom {
+  margin-top: clamp(44px, 6vh, 64px); padding-top: 26px;
+  border-top: 1px solid var(--line-light);
+  display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between;
+  font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--smoke);
+}
+@media (max-width: 860px) { .ld-footer-top { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .ld-footer-cols { grid-template-columns: 1fr; } }
+
+/* ── LIGHTBOX ───────────────────────────────────── */
+.ld-lb {
+  position: fixed; inset: 0; z-index: 10000;
+  display: none; align-items: center; justify-content: center;
+  background: rgba(24,18,12,.93);
+  padding: 4vmin;
+  opacity: 0; transition: opacity .28s ease;
+}
+.ld-lb.open { display: flex; }
+.ld-lb.visible { opacity: 1; }
+.ld-lb img {
+  max-width: 92vw; max-height: 88vh; width: auto; height: auto;
+  object-fit: contain; box-shadow: 0 30px 80px rgba(0,0,0,.5);
+}
+.ld-lb-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 54px; height: 54px;
+  background: none; border: none;
+  color: rgba(244,242,237,.7); font-size: 40px; line-height: 1;
+  font-family: Georgia, serif; cursor: pointer;
+  transition: color .25s;
+}
+.ld-lb-nav:hover { color: #fff; }
+.ld-lb-prev { left: 10px; }
+.ld-lb-next { right: 10px; }
+.ld-lb-close {
+  position: absolute; top: 18px; right: 22px;
+  width: 44px; height: 44px; background: none; border: none;
+  color: rgba(244,242,237,.85); font-size: 30px; line-height: 1;
+  font-family: Georgia, serif; cursor: pointer; transition: color .25s;
+}
+.ld-lb-close:hover { color: #fff; }
+@media (max-width: 640px) { .ld-lb-nav { display: none; } }
+
+html { scroll-behavior: smooth; }
+</style>
+
+<div class="ld">
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="ld-header" id="ld-header">
+    <div class="ld-header-inner">
+      <a href="/" class="ld-brand">Atelier <span>Depuydt</span></a>
+      <nav class="ld-nav">
+        <a href="/over-luc/">Over Luc</a>
+        <a href="/galerij/" class="active">Galerij</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ═══ GALERIJ ═══ -->
+  <section class="ld-gal">
+    <div class="ld-w">
+      <div class="ld-gal-masonry" id="ld-gal">
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4433-scaled.jpg" alt="Handgemaakt lederwerk"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4156-1-scaled.jpg" alt="Handgemaakt lederwerk"></div>
+        <div class="ld-gal-it ld-gal-it--tall ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4201-scaled.jpg" alt="Luc Depuydt aan het werk"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4167-scaled.jpg" alt="Detail van leder"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4477-scaled.jpg" alt="Handgemaakt lederwerk"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4289-scaled.jpg" alt="In het atelier"></div>
+        <div class="ld-gal-it ld-gal-it--wide ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4171-scaled.jpg" alt="Detail van leder"></div>
+        <div class="ld-gal-it ld-gal-it--tall ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4595-scaled.jpg" alt="Handen aan het werk"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4424-scaled.jpg" alt="Volnerf leder"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4175-scaled.jpg" alt="Detail van leder"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4463-scaled.jpg" alt="Handgemaakt lederwerk"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4350-scaled.jpg" alt="Het atelier"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4179-scaled.jpg" alt="Detail van leder"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4631-scaled.jpg" alt="Handgemaakt lederwerk"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4286-scaled.jpg" alt="Detail van handgemaakt leder"></div>
+        <div class="ld-gal-it ld-gal-it--tall ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4269-scaled.jpg" alt="In het atelier"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4182-scaled.jpg" alt="In het atelier"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4621-scaled.jpg" alt="Handgemaakt lederwerk"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4309-scaled.jpg" alt="Traditioneel gereedschap"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4206-scaled.jpg" alt="In het atelier"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4434-scaled.jpg" alt="Handgemaakt lederwerk"></div>
+        <div class="ld-gal-it ld-gal-it--wide ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4427-scaled.jpg" alt="Handgemaakt lederwerk"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4280-scaled.jpg" alt="Handgemaakt lederwerk op maat"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4375-scaled.jpg" alt="In het atelier"></div>
+        <div class="ld-gal-it ld-gal-it--tall ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4533-scaled.jpg" alt="Handgemaakt lederwerk"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4458-scaled.jpg" alt="Luc Depuydt aan het werk"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4430-scaled.jpg" alt="Handgemaakt lederwerk"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4559-scaled.jpg" alt="In het atelier"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4156-scaled.jpg" alt="Uniek stuk uit het atelier"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4677-scaled.jpg" alt="Handgemaakt lederwerk"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4560-scaled.jpg" alt="In het atelier"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4429-scaled.jpg" alt="Detail van handgemaakt lederwerk"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4685-1-scaled.jpg" alt="Handgemaakt lederwerk"></div>
+        <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4640-scaled.jpg" alt="In het atelier"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="ld-footer">
+    <div class="ld-w">
+      <div class="ld-footer-top">
+        <div class="ld-footer-brand">
+          <span class="ld-brand">Atelier <span>Depuydt</span></span>
+          <p>Ambachtelijk Leder Atelier. Handgemaakt lederwerk op maat, in West-Vlaanderen.</p>
+        </div>
+        <div class="ld-footer-cols">
+          <div>
+            <span class="k">Telefoon</span>
+            <a class="v" href="tel:+32478444589">+32&nbsp;478&nbsp;44&nbsp;45&nbsp;89</a>
+          </div>
+          <div>
+            <span class="k">E-mail</span>
+            <a class="v" href="mailto:luc.depuydt1@gmail.com">luc.depuydt1@gmail.com</a>
+          </div>
+          <div>
+            <span class="k">Atelier</span>
+            <span class="v">Moenaardestraat 15, 8978 Watou</span>
+          </div>
+          <div>
+            <span class="k">Volg het atelier</span>
+            <a class="v" href="https://www.facebook.com/p/Ambachtelijk-Leder-Atelier-100063621544625/" target="_blank" rel="noopener">Facebook</a>
+          </div>
+        </div>
+      </div>
+      <div class="ld-footer-bottom">
+        <span>&copy; <span id="ld-year">2026</span> Ambachtelijk Leder Atelier Depuydt</span>
+        <span>Handgemaakt in West-Vlaanderen</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══ LIGHTBOX ═══ -->
+  <div class="ld-lb" id="ld-lb" role="dialog" aria-modal="true" aria-label="Afbeelding vergroot bekijken">
+    <img id="ld-lb-img" src="" alt="">
+    <button class="ld-lb-nav ld-lb-prev" id="ld-lb-prev" type="button" aria-label="Vorige">&lsaquo;</button>
+    <button class="ld-lb-nav ld-lb-next" id="ld-lb-next" type="button" aria-label="Volgende">&rsaquo;</button>
+    <button class="ld-lb-close" id="ld-lb-close" type="button" aria-label="Sluiten">&times;</button>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  // Jaartal
+  var y = document.getElementById('ld-year');
+  if (y) y.textContent = new Date().getFullYear();
+
+  // Scroll-animaties (met kleine trapsgewijze vertraging)
+  var items = Array.prototype.slice.call(document.querySelectorAll('.ld-anim'));
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  items.forEach(function(el){ io.observe(el); });
+
+  // ── Lightbox met vorige/volgende ──
+  var imgs    = Array.prototype.slice.call(document.querySelectorAll('#ld-gal img'));
+  var lb      = document.getElementById('ld-lb');
+  var lbImg   = document.getElementById('ld-lb-img');
+  var lbClose = document.getElementById('ld-lb-close');
+  var lbPrev  = document.getElementById('ld-lb-prev');
+  var lbNext  = document.getElementById('ld-lb-next');
+  var cur = 0;
+
+  function show(i){
+    cur = (i + imgs.length) % imgs.length;
+    lbImg.src = imgs[cur].src;
+    lbImg.alt = imgs[cur].alt || '';
+  }
+  function lbOpen(i){
+    show(i);
+    lb.classList.add('open');
+    requestAnimationFrame(function(){ lb.classList.add('visible'); });
+    document.body.style.overflow = 'hidden';
+  }
+  function lbShut(){
+    lb.classList.remove('visible');
+    setTimeout(function(){ lb.classList.remove('open'); lbImg.src = ''; }, 280);
+    document.body.style.overflow = '';
+  }
+  imgs.forEach(function(img, i){ img.addEventListener('click', function(){ lbOpen(i); }); });
+  lbPrev.addEventListener('click', function(e){ e.stopPropagation(); show(cur - 1); });
+  lbNext.addEventListener('click', function(e){ e.stopPropagation(); show(cur + 1); });
+  lbClose.addEventListener('click', lbShut);
+  lb.addEventListener('click', function(e){ if (e.target === lb) lbShut(); });
+  document.addEventListener('keydown', function(e){
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') lbShut();
+    else if (e.key === 'ArrowLeft') show(cur - 1);
+    else if (e.key === 'ArrowRight') show(cur + 1);
+  });
+  // swipe (gsm): links/rechts wisselen, omlaag sluiten
+  var tx = 0, ty = 0;
+  lb.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
+  lb.addEventListener('touchend', function(e){
+    var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) { show(cur + (dx < 0 ? 1 : -1)); }
+    else if (dy > 60) { lbShut(); }
+  }, { passive: true });
+})();
+</script>
