@@ -290,18 +290,24 @@ body.admin-bar .ld-header { top: 32px; }
 .ld-hero {
   position: relative;
   margin-top: 68px;                        /* onder de vaste header */
-  min-height: clamp(600px, calc(100vh - 68px), 820px);
-  min-height: clamp(600px, calc(100svh - 68px), 820px);
-  display: grid; place-items: center;
-  padding: clamp(48px, 9vh, 100px) clamp(20px, 4vw, 48px);
+  min-height: clamp(720px, calc(100vh - 68px), 980px);
+  min-height: clamp(720px, calc(100svh - 68px), 980px);
   overflow: hidden;
   background: var(--paper);
+}
+/* verankert de foto's aan een gecentreerde kolom, zodat hun afstand
+   tot de tekst gelijk blijft — ook op erg brede schermen */
+.ld-hero-inner {
+  position: absolute; inset: 0;
+  max-width: 1460px; margin-inline: auto;
+  display: grid; place-items: center;
+  padding: clamp(40px, 7vh, 84px) clamp(20px, 4vw, 48px);
 }
 .ld-hero-head {
   position: relative;
   z-index: 3;
   text-align: center;
-  max-width: 440px;
+  max-width: 430px;
 }
 .ld-hero h1 {
   font-size: clamp(34px, 4.6vw, 62px);
@@ -336,31 +342,32 @@ body.admin-bar .ld-header { top: 32px; }
 .ld-hero-ph img { object-fit: cover; filter: saturate(.92); }
 /* boven = staande foto; links & rechts exact hetzelfde formaat */
 .ld-hero-ph--1, .ld-hero-ph--3 {
-  width: clamp(240px, 22vw, 348px); aspect-ratio: 4 / 5;
-  top: 8%;
+  width: clamp(288px, 26vw, 418px); aspect-ratio: 4 / 5;
+  top: 6%;
 }
-/* onder = liggende foto, over de bovenste heen; links & rechts identiek */
+/* onder = liggende foto, verankerd aan de onderkant zodat ze altijd past */
 .ld-hero-ph--2, .ld-hero-ph--4 {
-  width: clamp(275px, 25vw, 400px); aspect-ratio: 5 / 4;
-  top: 48%; z-index: 2;
+  width: clamp(330px, 30vw, 480px); aspect-ratio: 5 / 4;
+  bottom: 6%; z-index: 2;
 }
 /* linkerkant */
 .ld-hero-ph--1 { left: 2%; transform: rotate(-5deg); }
-.ld-hero-ph--2 { left: 5%; transform: rotate(4deg); }
+.ld-hero-ph--2 { left: 1%; transform: rotate(4deg); }
 /* rechterkant — exact gespiegeld (positie + rotatie) */
 .ld-hero-ph--3 { right: 2%; transform: rotate(5deg); }
-.ld-hero-ph--4 { right: 5%; transform: rotate(-4deg); }
-@media (max-width: 1180px) {
-  .ld-hero {
+.ld-hero-ph--4 { right: 1%; transform: rotate(-4deg); }
+@media (max-width: 1320px) {
+  .ld-hero { min-height: 0; }
+  .ld-hero-inner {
+    position: static;
     display: flex; flex-direction: column; align-items: center;
     gap: clamp(28px, 5vw, 44px);
-    min-height: 0;
     padding-block: clamp(44px, 8vh, 72px);
   }
   .ld-hero-gallery {
     display: grid; grid-template-columns: 1fr 1fr;
     gap: clamp(12px, 2.5vw, 18px);
-    width: 100%; max-width: 440px;
+    width: 100%; max-width: 460px;
   }
   .ld-hero-ph {
     position: static; transform: none !important;
@@ -826,22 +833,24 @@ html { scroll-behavior: smooth; }
 
   <!-- ═══ HERO ═══ -->
   <section class="ld-hero" id="ld-top">
-    <div class="ld-hero-head ld-anim in ld-anim-d1">
-      <h1>Leder, bewerkt <em>zoals vroeger.</em></h1>
-      <p class="ld-hero-sub">
-        Luc Depuydt bewerkt het leder nog met de hand, met traditioneel
-        gereedschap en respect voor de huid. Elk stuk op maat, elk stuk uniek.
-      </p>
-      <div class="ld-hero-actions">
-        <a class="ld-btn ld-btn--primary" href="/contact/">Contact</a>
-        <a class="ld-btn ld-btn--ghost" href="/over-luc/">Over Luc</a>
+    <div class="ld-hero-inner">
+      <div class="ld-hero-head ld-anim in ld-anim-d1">
+        <h1>Leder, bewerkt <em>zoals vroeger.</em></h1>
+        <p class="ld-hero-sub">
+          Luc Depuydt bewerkt het leder nog met de hand, met traditioneel
+          gereedschap en respect voor de huid. Elk stuk op maat, elk stuk uniek.
+        </p>
+        <div class="ld-hero-actions">
+          <a class="ld-btn ld-btn--primary" href="/contact/">Contact</a>
+          <a class="ld-btn ld-btn--ghost" href="/over-luc/">Over Luc</a>
+        </div>
       </div>
-    </div>
-    <div class="ld-hero-gallery">
-      <div class="ld-hero-ph ld-hero-ph--1 ld-anim in"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4309-scaled.jpg" alt="Traditioneel gereedschap in het atelier"></div>
-      <div class="ld-hero-ph ld-hero-ph--2 ld-anim in ld-anim-d1"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4368-scaled.jpg" alt="Het atelier van Luc Depuydt"></div>
-      <div class="ld-hero-ph ld-hero-ph--3 ld-anim in ld-anim-d2"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4458-scaled.jpg" alt="Luc Depuydt aan het werk"></div>
-      <div class="ld-hero-ph ld-hero-ph--4 ld-anim in ld-anim-d3"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4702-scaled.jpg" alt="Luc Depuydt in de deuropening van zijn lederatelier"></div>
+      <div class="ld-hero-gallery">
+        <div class="ld-hero-ph ld-hero-ph--1 ld-anim in"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4309-scaled.jpg" alt="Traditioneel gereedschap in het atelier"></div>
+        <div class="ld-hero-ph ld-hero-ph--2 ld-anim in ld-anim-d1"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4368-scaled.jpg" alt="Het atelier van Luc Depuydt"></div>
+        <div class="ld-hero-ph ld-hero-ph--3 ld-anim in ld-anim-d2"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4458-scaled.jpg" alt="Luc Depuydt aan het werk"></div>
+        <div class="ld-hero-ph ld-hero-ph--4 ld-anim in ld-anim-d3"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4702-scaled.jpg" alt="Luc Depuydt in de deuropening van zijn lederatelier"></div>
+      </div>
     </div>
   </section>
 
