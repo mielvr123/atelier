@@ -286,34 +286,43 @@ body.admin-bar .ld-header { top: 32px; }
   .ld-nav a:first-child { border-top: none; }
 }
 
-/* ── HERO: volle achtergrondfoto, tekst gecentreerd ── */
+/* ── HERO: fotomozaïek met tekstkaart in het midden ── */
 .ld-hero {
   position: relative;
   margin-top: 68px;                        /* onder de vaste header */
-  height: clamp(520px, calc(100vh - 68px), 860px);
-  height: clamp(520px, calc(100svh - 68px), 860px);
-  display: flex; align-items: center; justify-content: center;
-  text-align: center;
   overflow: hidden;
 }
-.ld-hero-bg { position: absolute; inset: 0; z-index: 0; }
-.ld-hero-bg img {
+.ld-hero-mosaic {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  height: clamp(560px, calc(100vh - 68px), 820px);
+  height: clamp(560px, calc(100svh - 68px), 820px);
+}
+.ld-hero-mosaic .ph { overflow: hidden; }
+.ld-hero-mosaic img {
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: center 58%;
-  transform: scale(1.6);                   /* stevig ingezoomd, zoals de mockup */
-  filter: saturate(.95);
+  filter: saturate(.9);
 }
 .ld-hero-head {
-  position: relative; z-index: 2;
-  padding-inline: clamp(20px, 4vw, 48px);
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  padding: clamp(16px, 4vw, 40px);
+  z-index: 2;
+}
+.ld-hero-card {
+  background: var(--paper);
+  text-align: center;
+  max-width: 500px; width: 100%;
+  padding: clamp(34px, 4.5vw, 60px) clamp(28px, 4.5vw, 56px);
+  box-shadow: 0 30px 70px rgba(24,18,12,.26);
 }
 .ld-hero h1 {
-  font-size: clamp(34px, 5vw, 72px);
+  font-size: clamp(34px, 4.4vw, 60px);
   font-weight: 400;
-  line-height: 1.06;
+  line-height: 1.08;
   letter-spacing: .01em;
-  white-space: nowrap;
 }
 .ld-hero h1 em { font-style: italic; font-weight: 300; color: var(--tan); }
 .ld-hero-sub {
@@ -322,12 +331,18 @@ body.admin-bar .ld-header { top: 32px; }
   font-weight: 300;
   line-height: 1.7;
   color: rgba(36,29,22,.72);
-  max-width: 44ch;
+  max-width: 40ch;
 }
 .ld-hero-actions {
   display: flex; flex-wrap: wrap; gap: 14px;
   justify-content: center;
   margin-top: 30px;
+}
+@media (max-width: 720px) {
+  .ld-hero-mosaic {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+  }
 }
 .ld-btn {
   display: inline-flex; align-items: center; justify-content: center;
@@ -787,18 +802,27 @@ html { scroll-behavior: smooth; }
 
   <!-- ═══ HERO ═══ -->
   <section class="ld-hero" id="ld-top">
-    <div class="ld-hero-bg">
-      <img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4433-scaled.jpg" alt="Detail van handgestikt lederwerk">
+    <div class="ld-hero-mosaic ld-anim in">
+      <div class="ph"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4286-scaled.jpg" alt="Detail van handgemaakt leder"></div>
+      <div class="ph"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4309-scaled.jpg" alt="Traditioneel gereedschap in het atelier"></div>
+      <div class="ph"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4702-scaled.jpg" alt="Luc Depuydt in de deuropening van zijn lederatelier"></div>
+      <div class="ph"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4433-scaled.jpg" alt="Handgemaakt lederwerk"></div>
+      <div class="ph"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4424-scaled.jpg" alt="Handbewerkt leder in het atelier"></div>
+      <div class="ph"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4458-scaled.jpg" alt="Luc Depuydt aan het werk"></div>
+      <div class="ph"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4368-scaled.jpg" alt="Het atelier van Luc Depuydt"></div>
+      <div class="ph"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4280-scaled.jpg" alt="Handgemaakt lederwerk op maat"></div>
     </div>
     <div class="ld-hero-head">
-      <h1 class="ld-anim in ld-anim-d1">Leder, bewerkt <em>zoals vroeger.</em></h1>
-      <p class="ld-hero-sub ld-anim in ld-anim-d2">
-        Luc Depuydt bewerkt het leder nog met de hand, met traditioneel
-        gereedschap en respect voor de huid. Elk stuk op maat, elk stuk uniek.
-      </p>
-      <div class="ld-hero-actions ld-anim in ld-anim-d2">
-        <a class="ld-btn ld-btn--primary" href="/contact/">Contact</a>
-        <a class="ld-btn ld-btn--ghost" href="/over-luc/">Over Luc</a>
+      <div class="ld-hero-card ld-anim in ld-anim-d1">
+        <h1>Leder, bewerkt <em>zoals vroeger.</em></h1>
+        <p class="ld-hero-sub">
+          Luc Depuydt bewerkt het leder nog met de hand, met traditioneel
+          gereedschap en respect voor de huid. Elk stuk op maat, elk stuk uniek.
+        </p>
+        <div class="ld-hero-actions">
+          <a class="ld-btn ld-btn--primary" href="/contact/">Contact</a>
+          <a class="ld-btn ld-btn--ghost" href="/over-luc/">Over Luc</a>
+        </div>
       </div>
     </div>
   </section>
