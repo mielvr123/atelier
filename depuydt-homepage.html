@@ -301,7 +301,7 @@ body.admin-bar .ld-header { top: 32px; }
   position: relative;
   z-index: 3;
   text-align: center;
-  max-width: 500px;
+  max-width: 470px;
 }
 .ld-hero h1 {
   font-size: clamp(34px, 4.6vw, 62px);
@@ -334,23 +334,23 @@ body.admin-bar .ld-header { top: 32px; }
   transition: transform .5s cubic-bezier(.22,1,.36,1);
 }
 .ld-hero-ph img { object-fit: cover; filter: saturate(.92); }
-.ld-hero-ph--1 {   /* boven-links */
-  width: clamp(150px, 15vw, 216px); aspect-ratio: 4 / 5;
-  top: 13%; left: 3.5%; transform: rotate(-5deg);
+/* boven = staande foto; links & rechts exact hetzelfde formaat */
+.ld-hero-ph--1, .ld-hero-ph--3 {
+  width: clamp(190px, 17vw, 268px); aspect-ratio: 4 / 5;
+  top: 11%;
 }
-.ld-hero-ph--2 {   /* onder-links, over de eerste heen */
-  width: clamp(160px, 16.5vw, 238px); aspect-ratio: 5 / 4;
-  top: 46%; left: 10%; transform: rotate(3.5deg); z-index: 2;
+/* onder = liggende foto, over de bovenste heen; links & rechts identiek */
+.ld-hero-ph--2, .ld-hero-ph--4 {
+  width: clamp(215px, 19.5vw, 310px); aspect-ratio: 5 / 4;
+  top: 39%; z-index: 2;
 }
-.ld-hero-ph--3 {   /* boven-rechts */
-  width: clamp(160px, 16.5vw, 238px); aspect-ratio: 5 / 4;
-  top: 12%; right: 4.5%; transform: rotate(4deg);
-}
-.ld-hero-ph--4 {   /* onder-rechts, over de derde heen */
-  width: clamp(150px, 15vw, 216px); aspect-ratio: 4 / 5;
-  top: 45%; right: 10%; transform: rotate(-3.5deg); z-index: 2;
-}
-@media (max-width: 980px) {
+/* linkerkant */
+.ld-hero-ph--1 { left: 3.5%; transform: rotate(-5deg); }
+.ld-hero-ph--2 { left: 9%;   transform: rotate(4deg); }
+/* rechterkant — exact gespiegeld (positie + rotatie) */
+.ld-hero-ph--3 { right: 3.5%; transform: rotate(5deg); }
+.ld-hero-ph--4 { right: 9%;   transform: rotate(-4deg); }
+@media (max-width: 1180px) {
   .ld-hero {
     display: flex; flex-direction: column; align-items: center;
     gap: clamp(28px, 5vw, 44px);
@@ -840,8 +840,8 @@ html { scroll-behavior: smooth; }
     <div class="ld-hero-gallery">
       <div class="ld-hero-ph ld-hero-ph--1 ld-anim in"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4309-scaled.jpg" alt="Traditioneel gereedschap in het atelier"></div>
       <div class="ld-hero-ph ld-hero-ph--2 ld-anim in ld-anim-d1"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4368-scaled.jpg" alt="Het atelier van Luc Depuydt"></div>
-      <div class="ld-hero-ph ld-hero-ph--3 ld-anim in ld-anim-d2"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4702-scaled.jpg" alt="Luc Depuydt in de deuropening van zijn lederatelier"></div>
-      <div class="ld-hero-ph ld-hero-ph--4 ld-anim in ld-anim-d3"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4458-scaled.jpg" alt="Luc Depuydt aan het werk"></div>
+      <div class="ld-hero-ph ld-hero-ph--3 ld-anim in ld-anim-d2"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4458-scaled.jpg" alt="Luc Depuydt aan het werk"></div>
+      <div class="ld-hero-ph ld-hero-ph--4 ld-anim in ld-anim-d3"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4702-scaled.jpg" alt="Luc Depuydt in de deuropening van zijn lederatelier"></div>
     </div>
   </section>
 
