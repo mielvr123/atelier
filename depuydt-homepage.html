@@ -286,40 +286,25 @@ body.admin-bar .ld-header { top: 32px; }
   .ld-nav a:first-child { border-top: none; }
 }
 
-/* ── HERO: fotomozaïek met tekstkaart in het midden ── */
+/* ── HERO: tekst gecentreerd op effen papier, zwevende foto's ── */
 .ld-hero {
   position: relative;
   margin-top: 68px;                        /* onder de vaste header */
+  min-height: clamp(600px, calc(100vh - 68px), 820px);
+  min-height: clamp(600px, calc(100svh - 68px), 820px);
+  display: grid; place-items: center;
+  padding: clamp(48px, 9vh, 100px) clamp(20px, 4vw, 48px);
   overflow: hidden;
-}
-.ld-hero-mosaic {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  height: clamp(560px, calc(100vh - 68px), 820px);
-  height: clamp(560px, calc(100svh - 68px), 820px);
-}
-.ld-hero-mosaic .ph { overflow: hidden; }
-.ld-hero-mosaic img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  filter: saturate(.9);
+  background: var(--paper);
 }
 .ld-hero-head {
-  position: absolute; inset: 0;
-  display: grid; place-items: center;
-  padding: clamp(16px, 4vw, 40px);
-  z-index: 2;
-}
-.ld-hero-card {
-  background: var(--paper);
+  position: relative;
+  z-index: 3;
   text-align: center;
-  max-width: 500px; width: 100%;
-  padding: clamp(34px, 4.5vw, 60px) clamp(28px, 4.5vw, 56px);
-  box-shadow: 0 30px 70px rgba(24,18,12,.26);
+  max-width: 500px;
 }
 .ld-hero h1 {
-  font-size: clamp(34px, 4.4vw, 60px);
+  font-size: clamp(34px, 4.6vw, 62px);
   font-weight: 400;
   line-height: 1.08;
   letter-spacing: .01em;
@@ -337,6 +322,51 @@ body.admin-bar .ld-header { top: 32px; }
   display: flex; flex-wrap: wrap; gap: 14px;
   justify-content: center;
   margin-top: 30px;
+}
+
+/* zwevende editorial-foto's aan weerszijden */
+.ld-hero-gallery { display: contents; }
+.ld-hero-ph {
+  position: absolute;
+  z-index: 1;
+  overflow: hidden;
+  box-shadow: 0 22px 48px rgba(24,18,12,.24);
+  transition: transform .5s cubic-bezier(.22,1,.36,1);
+}
+.ld-hero-ph img { object-fit: cover; filter: saturate(.92); }
+.ld-hero-ph--1 {   /* boven-links */
+  width: clamp(150px, 15vw, 216px); aspect-ratio: 4 / 5;
+  top: 13%; left: 3.5%; transform: rotate(-5deg);
+}
+.ld-hero-ph--2 {   /* onder-links, over de eerste heen */
+  width: clamp(160px, 16.5vw, 238px); aspect-ratio: 5 / 4;
+  top: 46%; left: 10%; transform: rotate(3.5deg); z-index: 2;
+}
+.ld-hero-ph--3 {   /* boven-rechts */
+  width: clamp(160px, 16.5vw, 238px); aspect-ratio: 5 / 4;
+  top: 12%; right: 4.5%; transform: rotate(4deg);
+}
+.ld-hero-ph--4 {   /* onder-rechts, over de derde heen */
+  width: clamp(150px, 15vw, 216px); aspect-ratio: 4 / 5;
+  top: 45%; right: 10%; transform: rotate(-3.5deg); z-index: 2;
+}
+@media (max-width: 980px) {
+  .ld-hero {
+    display: flex; flex-direction: column; align-items: center;
+    gap: clamp(28px, 5vw, 44px);
+    min-height: 0;
+    padding-block: clamp(44px, 8vh, 72px);
+  }
+  .ld-hero-gallery {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: clamp(12px, 2.5vw, 18px);
+    width: 100%; max-width: 440px;
+  }
+  .ld-hero-ph {
+    position: static; transform: none !important;
+    width: auto; aspect-ratio: 4 / 5;
+    box-shadow: 0 14px 30px rgba(24,18,12,.18);
+  }
 }
 .ld-btn {
   display: inline-flex; align-items: center; justify-content: center;
@@ -796,24 +826,22 @@ html { scroll-behavior: smooth; }
 
   <!-- ═══ HERO ═══ -->
   <section class="ld-hero" id="ld-top">
-    <div class="ld-hero-mosaic ld-anim in">
-      <div class="ph"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4309-scaled.jpg" alt="Traditioneel gereedschap in het atelier"></div>
-      <div class="ph"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4702-scaled.jpg" alt="Luc Depuydt in de deuropening van zijn lederatelier"></div>
-      <div class="ph"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4368-scaled.jpg" alt="Het atelier van Luc Depuydt"></div>
-      <div class="ph"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4458-scaled.jpg" alt="Luc Depuydt aan het werk"></div>
-    </div>
-    <div class="ld-hero-head">
-      <div class="ld-hero-card ld-anim in ld-anim-d1">
-        <h1>Leder, bewerkt <em>zoals vroeger.</em></h1>
-        <p class="ld-hero-sub">
-          Luc Depuydt bewerkt het leder nog met de hand, met traditioneel
-          gereedschap en respect voor de huid. Elk stuk op maat, elk stuk uniek.
-        </p>
-        <div class="ld-hero-actions">
-          <a class="ld-btn ld-btn--primary" href="/contact/">Contact</a>
-          <a class="ld-btn ld-btn--ghost" href="/over-luc/">Over Luc</a>
-        </div>
+    <div class="ld-hero-head ld-anim in ld-anim-d1">
+      <h1>Leder, bewerkt <em>zoals vroeger.</em></h1>
+      <p class="ld-hero-sub">
+        Luc Depuydt bewerkt het leder nog met de hand, met traditioneel
+        gereedschap en respect voor de huid. Elk stuk op maat, elk stuk uniek.
+      </p>
+      <div class="ld-hero-actions">
+        <a class="ld-btn ld-btn--primary" href="/contact/">Contact</a>
+        <a class="ld-btn ld-btn--ghost" href="/over-luc/">Over Luc</a>
       </div>
+    </div>
+    <div class="ld-hero-gallery">
+      <div class="ld-hero-ph ld-hero-ph--1 ld-anim in"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4309-scaled.jpg" alt="Traditioneel gereedschap in het atelier"></div>
+      <div class="ld-hero-ph ld-hero-ph--2 ld-anim in ld-anim-d1"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4368-scaled.jpg" alt="Het atelier van Luc Depuydt"></div>
+      <div class="ld-hero-ph ld-hero-ph--3 ld-anim in ld-anim-d2"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4702-scaled.jpg" alt="Luc Depuydt in de deuropening van zijn lederatelier"></div>
+      <div class="ld-hero-ph ld-hero-ph--4 ld-anim in ld-anim-d3"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4458-scaled.jpg" alt="Luc Depuydt aan het werk"></div>
     </div>
   </section>
 
