@@ -78,25 +78,25 @@ body.admin-bar .ld-header { top: 32px; }
 }
 .ld .ld-eyebrow--light { color: var(--tan-lt); }   /* op donkere blokken */
 
-/* stiksel-lijn (zadelsteek) — bredere tussenruimte tussen de steken */
+/* stiksel-lijn (zadelsteek) — steken dichter bij elkaar, in gedempt leder */
 .ld .ld-stitch {
-  --stitch-color: var(--line-d);
+  --stitch-color: rgba(125,68,25,.34);
   border: none;
   height: 2px;
   background-image: repeating-linear-gradient(90deg,
-    var(--stitch-color) 0 9px, transparent 9px 24px);
+    var(--stitch-color) 0 7px, transparent 7px 15px);
   width: 88px;
   margin: 28px 0;
 }
-.ld .ld-stitch--dark { --stitch-color: rgba(27,22,19,.35); }
+.ld .ld-stitch--dark { --stitch-color: rgba(125,68,25,.4); }
 .ld .ld-stitch--center { margin-inline: auto; }
 
 /* stiksel over de volledige paginabreedte, tussen secties */
 .ld .ld-sep {
-  --stitch-color: var(--line-d);
+  --stitch-color: rgba(125,68,25,.3);
   height: 2px;
   background-image: repeating-linear-gradient(90deg,
-    var(--stitch-color) 0 9px, transparent 9px 24px);
+    var(--stitch-color) 0 7px, transparent 7px 15px);
 }
 
 /* ── HET VERHAAL (teaser naar Over Luc) ─────────── */
@@ -171,11 +171,9 @@ body.admin-bar .ld-header { top: 32px; }
   display: grid;
   grid-template-columns: 1.6fr 1fr;
   gap: clamp(14px, 1.8vw, 22px);
-  max-width: 900px;
-  margin-inline: auto;
 }
 .ld-galt-grid .ph { overflow: hidden; }
-.ld-galt-big .ph { height: 100%; min-height: 250px; }
+.ld-galt-big .ph { height: 100%; min-height: 340px; }
 .ld-galt-side {
   display: grid;
   grid-template-rows: 1fr 1fr;
@@ -221,7 +219,7 @@ body.admin-bar .ld-header { top: 32px; }
   position: absolute; left: 0; right: 0; bottom: 0;
   height: 2px;
   background-image: repeating-linear-gradient(90deg,
-    var(--line-d) 0 9px, transparent 9px 24px);
+    rgba(125,68,25,.3) 0 7px, transparent 7px 15px);
 }
 .ld-header-inner {
   display: flex; align-items: baseline; justify-content: space-between;
@@ -252,32 +250,36 @@ body.admin-bar .ld-header { top: 32px; }
 
 /* ── HERO: tekst + knoppen + fotorij ────────────── */
 .ld-hero {
-  padding-top: calc(68px + clamp(18px, 3vh, 34px));   /* onder de vaste header */
+  padding-top: calc(68px + clamp(12px, 2.2vh, 26px));   /* onder de vaste header */
   padding-bottom: clamp(30px, 5vh, 56px);
 }
 .ld-hero-head {
-  max-width: 44ch;
-  margin-bottom: clamp(22px, 3.4vh, 38px);
+  max-width: none;
+  margin-inline: auto;
+  margin-bottom: clamp(18px, 2.8vh, 32px);
+  text-align: center;
 }
 .ld-hero h1 {
-  font-size: clamp(38px, 5.4vw, 74px);
+  font-size: clamp(34px, 5vw, 72px);
   font-weight: 400;
   line-height: 1.04;
   letter-spacing: .01em;
-  margin-top: 18px;
+  margin-top: 6px;
+  white-space: nowrap;
 }
 .ld-hero h1 em { font-style: italic; font-weight: 300; color: var(--tan); }
 .ld-hero-sub {
-  margin-top: 22px;
+  margin: 20px auto 0;
   font-size: clamp(16px, 1.7vw, 19px);
   font-weight: 300;
   line-height: 1.65;
   color: rgba(36,29,22,.72);
-  max-width: 48ch;
+  max-width: 42ch;
 }
 .ld-hero-actions {
   display: flex; flex-wrap: wrap; gap: 14px;
-  margin-top: 32px;
+  justify-content: center;
+  margin-top: 28px;
 }
 .ld-btn {
   display: inline-flex; align-items: center; justify-content: center;
@@ -312,6 +314,7 @@ body.admin-bar .ld-header { top: 32px; }
 @media (max-width: 860px) {
   .ld-hero-grid { grid-template-columns: repeat(2, 1fr); }
   .ld-hero-grid .ph--desktop { display: none; }   /* op gsm: 4 foto's */
+  .ld-hero h1 { white-space: normal; }   /* titel mag afbreken op gsm */
 }
 
 /* ── CITAAT / MANIFEST ──────────────────────────── */
@@ -438,7 +441,7 @@ body.admin-bar .ld-header { top: 32px; }
   text-align: center;
 }
 .ld-watou .ld-eyebrow { color: var(--tan-lt); }
-.ld-watou .ld-stitch { --stitch-color: var(--line-light); }
+.ld-watou .ld-stitch { --stitch-color: rgba(189,136,80,.5); }
 .ld-watou h2 {
   font-size: clamp(30px, 4vw, 50px);
   font-weight: 400;
@@ -755,9 +758,8 @@ html { scroll-behavior: smooth; }
       <div class="ld-hero-head">
         <h1 class="ld-anim in ld-anim-d1">Leder, bewerkt <em>zoals vroeger.</em></h1>
         <p class="ld-hero-sub ld-anim in ld-anim-d2">
-          In zijn atelier bewerkt Luc Depuydt het leder nog met de hand:
-          traditioneel gereedschap, uiterste nauwlettendheid en een diep
-          respect voor de huid. Elk stuk op maat, elk stuk uniek.
+          Luc Depuydt bewerkt het leder nog met de hand, met traditioneel
+          gereedschap en respect voor de huid. Elk stuk op maat, elk stuk uniek.
         </p>
         <div class="ld-hero-actions ld-anim in ld-anim-d2">
           <a class="ld-btn ld-btn--primary" href="/contact/">Contact</a>
