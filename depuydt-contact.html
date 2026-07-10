@@ -40,6 +40,8 @@ body.admin-bar .ld-header { top: 32px; }
   --line:   rgba(36,29,22,.14);
   --line-d: rgba(36,29,22,.22);
   --line-light: rgba(244,242,237,.18);
+  --stitch: #d0beac;                   /* effen leder-stiksel (op licht) — overal gelijk */
+  --stitch-lt: #6e5c46;                /* stiksel op donkere blokken */
   font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
   background: var(--paper);
   color: var(--ink);
@@ -88,8 +90,15 @@ body.admin-bar .ld-header { top: 32px; }
   display: flex; align-items: center;
   background: rgba(244,242,237,.94);
   backdrop-filter: blur(6px);
-  border-bottom: 1px solid var(--line-d);
   font-family: 'Fraunces', Georgia, serif; color: var(--ink);
+}
+/* gestikte scheidingslijn onderaan de header */
+.ld-header::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background-image: repeating-linear-gradient(90deg,
+    var(--stitch) 0 7px, transparent 7px 15px);
 }
 .ld-header-inner {
   display: flex; align-items: baseline; justify-content: space-between; width: 100%;
@@ -103,10 +112,46 @@ body.admin-bar .ld-header { top: 32px; }
 }
 .ld-nav a:hover { opacity: 1; color: var(--tan); }
 .ld-nav a.active { opacity: 1; color: var(--tan); }
+
+/* ── HAMBURGER (mobiel menu) ─────────────────────── */
+.ld-burger {
+  display: none;
+  flex-direction: column; justify-content: center; gap: 5px;
+  width: 42px; height: 42px; padding: 9px; margin-right: -9px;
+  background: none; border: none; cursor: pointer;
+}
+.ld-burger span {
+  display: block; width: 100%; height: 2px; background: var(--ink);
+  transition: transform .3s ease, opacity .3s ease;
+}
+.ld-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.ld-burger.open span:nth-child(2) { opacity: 0; }
+.ld-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
 @media (max-width: 720px) {
-  .ld-nav { gap: 18px; }
-  .ld-nav a { font-size: 11px; letter-spacing: .12em; }
+  .ld-header-inner { align-items: center; }
+  .ld-burger { display: flex; }
   .ld-brand { font-size: 15px; }
+  .ld-nav {
+    position: fixed; top: 68px; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    padding: 4px clamp(20px, 4vw, 48px) 16px;
+    background: rgba(244,242,237,.98);
+    backdrop-filter: blur(8px);
+    transform: translateY(-14px); opacity: 0; pointer-events: none;
+    transition: opacity .28s ease, transform .28s ease;
+    max-height: calc(100vh - 68px); overflow-y: auto;
+  }
+  .ld-nav::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+    background-image: repeating-linear-gradient(90deg, var(--stitch) 0 7px, transparent 7px 15px);
+  }
+  .ld-nav.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .ld-nav a {
+    font-size: 15px; letter-spacing: .14em; opacity: 1;
+    padding: 15px 2px; border-top: 1px solid var(--line);
+  }
+  .ld-nav a:first-child { border-top: none; }
 }
 
 /* ── CONTACT ────────────────────────────────────── */
@@ -159,6 +204,12 @@ body.admin-bar .ld-header { top: 32px; }
 .ld-map {
   padding-bottom: clamp(60px, 9vh, 110px);
 }
+.ld-map-head { margin-bottom: clamp(22px, 3.5vh, 40px); }
+.ld-map-title {
+  font-size: clamp(28px, 3.6vw, 44px);
+  font-weight: 400; line-height: 1.1; margin-top: 12px;
+}
+.ld-map-title em { font-style: italic; font-weight: 300; color: var(--tan); }
 .ld-map-frame {
   position: relative;
   aspect-ratio: 16 / 6;
@@ -260,11 +311,14 @@ html { scroll-behavior: smooth; }
   <header class="ld-header" id="ld-header">
     <div class="ld-w ld-header-inner">
       <a href="/" class="ld-brand">Atelier <span>Depuydt</span></a>
-      <nav class="ld-nav">
+      <nav class="ld-nav" id="ld-nav">
         <a href="/over-luc/">Over Luc</a>
         <a href="/galerij/">Galerij</a>
         <a href="/contact/" class="active">Contact</a>
       </nav>
+      <button class="ld-burger" id="ld-burger" type="button" aria-label="Menu openen" aria-expanded="false" aria-controls="ld-nav">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
@@ -316,6 +370,10 @@ html { scroll-behavior: smooth; }
   <!-- ═══ KAART ═══ -->
   <section class="ld-map">
     <div class="ld-w">
+      <div class="ld-map-head ld-anim in">
+        <p class="ld-eyebrow">Kom langs</p>
+        <h2 class="ld-map-title">Atelier</h2>
+      </div>
       <div class="ld-map-frame ld-anim in">
         <iframe
           title="Ambachtelijk Leder Atelier Depuydt, Moenaardestraat 15, 8978 Watou"
@@ -367,6 +425,22 @@ html { scroll-behavior: smooth; }
 (function(){
   var y = document.getElementById('ld-year');
   if (y) y.textContent = new Date().getFullYear();
+
+  // ── Hamburger-menu (mobiel) ──
+  (function(){
+    var burger = document.getElementById('ld-burger');
+    var nav = document.getElementById('ld-nav');
+    if (!burger || !nav) return;
+    function setOpen(open){
+      nav.classList.toggle('open', open);
+      burger.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    burger.addEventListener('click', function(){ setOpen(!nav.classList.contains('open')); });
+    nav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setOpen(false); }); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') setOpen(false); });
+  })();
+
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
