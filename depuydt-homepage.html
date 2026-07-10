@@ -91,9 +91,10 @@ body.admin-bar .ld-header { top: 32px; }
 .ld .ld-stitch--dark { --stitch-color: rgba(125,68,25,.4); }
 .ld .ld-stitch--center { margin-inline: auto; }
 
-/* stiksel over de volledige paginabreedte, tussen secties */
+/* stiksel over de volledige paginabreedte, tussen secties
+   — zelfde dikte, kleur en patroon als de sectie-stiksels */
 .ld .ld-sep {
-  --stitch-color: rgba(125,68,25,.3);
+  --stitch-color: rgba(125,68,25,.34);
   height: 2px;
   background-image: repeating-linear-gradient(90deg,
     var(--stitch-color) 0 7px, transparent 7px 15px);
@@ -250,13 +251,13 @@ body.admin-bar .ld-header { top: 32px; }
 
 /* ── HERO: tekst + knoppen + fotorij ────────────── */
 .ld-hero {
-  padding-top: calc(68px + clamp(12px, 2.2vh, 26px));   /* onder de vaste header */
+  padding-top: calc(68px + clamp(30px, 5vh, 66px));   /* onder de vaste header */
   padding-bottom: clamp(30px, 5vh, 56px);
 }
 .ld-hero-head {
   max-width: none;
   margin-inline: auto;
-  margin-bottom: clamp(18px, 2.8vh, 32px);
+  margin-bottom: clamp(34px, 5vh, 58px);
   text-align: center;
 }
 .ld-hero h1 {
@@ -757,10 +758,6 @@ html { scroll-behavior: smooth; }
     <div class="ld-w">
       <div class="ld-hero-head">
         <h1 class="ld-anim in ld-anim-d1">Leder, bewerkt <em>zoals vroeger.</em></h1>
-        <p class="ld-hero-sub ld-anim in ld-anim-d2">
-          Luc Depuydt bewerkt het leder nog met de hand, met traditioneel
-          gereedschap en respect voor de huid. Elk stuk op maat, elk stuk uniek.
-        </p>
         <div class="ld-hero-actions ld-anim in ld-anim-d2">
           <a class="ld-btn ld-btn--primary" href="/contact/">Contact</a>
           <a class="ld-btn ld-btn--ghost" href="/over-luc/">Over Luc</a>
