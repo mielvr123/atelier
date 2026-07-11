@@ -1,12 +1,4 @@
-<!-- ═══════════════════════════════════════════════════════════
-     AMBACHTELIJK LEDER ATELIER DEPUYDT — OVER LUC
-     Custom HTML-blok voor WordPress (Twenty Twenty-Five)
-     Prefix: .ld (zelfde stijl als de homepage)
-     ═══════════════════════════════════════════════════════════ -->
-
-<!-- Fix Twenty Twenty Five whitespace -->
 <style>
-/* TT25 FSE resets */
 .wp-site-blocks,
 .wp-site-blocks > *,
 .wp-block-post-content,
@@ -18,7 +10,6 @@
   padding-top: 0 !important;
   margin-top: 0 !important;
 }
-/* Admin bar offset for fixed header */
 body.admin-bar .ld-header { top: 32px; }
 @media screen and (max-width: 782px) {
   body.admin-bar .ld-header { top: 46px; }
@@ -30,34 +21,31 @@ body.admin-bar .ld-header { top: 32px; }
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
 
 <style>
-/* ── TOKENS ─────────────────────────────────────── */
 .ld {
-  --ink:    #241d16;          /* donkere inkt, warm */
-  --coal:   #2b2118;          /* donker accentblok / footer */
-  --paper:  #f4f2ed;          /* zacht gebroken wit (paginakleur) */
-  --paper2: #eae7e0;          /* iets dieper, voor afwisseling */
-  --tan:    #7d4419;          /* donker cognac leder (accent) */
-  --tan-lt: #bd8850;          /* licht leder, op donker */
-  --smoke:  #867d71;          /* gedempt grijsbruin */
+  --ink:    #241d16;
+  --coal:   #2b2118;
+  --paper:  #f4f2ed;
+  --paper2: #eae7e0;
+  --tan:    #7d4419;
+  --tan-lt: #bd8850;
+  --smoke:  #867d71;
   --line:   rgba(36,29,22,.14);
-  --line-d: rgba(36,29,22,.22);        /* donkere haarlijn (op licht) */
-  --line-light: rgba(244,242,237,.18); /* lichte haarlijn (op donker) */
-  --stitch: #d0beac;                   /* effen leder-stiksel (op licht) — overal gelijk */
-  --stitch-lt: #6e5c46;                /* stiksel op donkere blokken */
+  --line-d: rgba(36,29,22,.22);
+  --line-light: rgba(244,242,237,.18);
+  --stitch: #d0beac;
+  --stitch-lt: #6e5c46;
   font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
   background: var(--paper);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── RESET ──────────────────────────────────────── */
 .ld *, .ld *::before, .ld *::after { box-sizing: border-box; margin: 0; padding: 0; }
 .ld a { text-decoration: none; color: inherit; }
 .ld img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 .ld .ld-w  { max-width: 1200px; margin-inline: auto; padding-inline: clamp(20px, 4vw, 48px); }
 
-/* korrel-textuur over de hele pagina */
 .ld { position: relative; }
 .ld::after {
   content: "";
@@ -65,11 +53,10 @@ body.admin-bar .ld-header { top: 32px; }
   pointer-events: none;
   z-index: 5;
   opacity: .35;
-  transform: translateZ(0);  /* eigen composietlaag, geen repaint bij scroll */
+  transform: translateZ(0);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.06'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* letterspaced label */
 .ld .ld-eyebrow {
   font-family: Georgia, serif;
   font-size: 12px;
@@ -78,7 +65,6 @@ body.admin-bar .ld-header { top: 32px; }
   color: var(--tan);
 }
 
-/* stiksel-lijn (zadelsteek) — effen leder-kleur, overal gelijk */
 .ld .ld-stitch {
   --stitch-color: var(--stitch);
   border: none;
@@ -91,8 +77,6 @@ body.admin-bar .ld-header { top: 32px; }
 .ld .ld-stitch--dark { --stitch-color: var(--stitch); }
 .ld .ld-stitch--center { margin-inline: auto; }
 
-/* stiksel over de volledige paginabreedte, tussen secties
-   — zelfde dikte, kleur en patroon als de sectie-stiksels */
 .ld .ld-sep {
   --stitch-color: var(--stitch);
   height: 2px;
@@ -100,7 +84,6 @@ body.admin-bar .ld-header { top: 32px; }
     var(--stitch-color) 0 7px, transparent 7px 15px);
 }
 
-/* ── DRAAD & NAALD door het verhaal ─────────────── */
 .ld-story { position: relative; }
 .ld-story > .ld-w { position: relative; z-index: 1; }
 .ld-thread {
@@ -114,7 +97,6 @@ body.admin-bar .ld-header { top: 32px; }
   .ld-thread #ld-thread-path { stroke: rgba(112,62,25,.42); }
 }
 
-/* ── ANIMATIES ──────────────────────────────────── */
 .ld-anim {
   opacity: 0;
   transform: translateY(26px);
@@ -125,7 +107,6 @@ body.admin-bar .ld-header { top: 32px; }
 .ld-anim-d2 { transition-delay: .24s; }
 .ld-anim-d3 { transition-delay: .38s; }
 
-/* ── HEADER ─────────────────────────────────────── */
 .ld-header {
   position: fixed; top: 0; left: 0; right: 0;
   z-index: 9999;
@@ -136,7 +117,6 @@ body.admin-bar .ld-header { top: 32px; }
   font-family: 'Fraunces', Georgia, serif;
   color: var(--ink);
 }
-/* gestikte scheidingslijn onderaan de header */
 .ld-header::after {
   content: "";
   position: absolute; left: 0; right: 0; bottom: 0;
@@ -166,7 +146,6 @@ body.admin-bar .ld-header { top: 32px; }
 .ld-nav a:hover { opacity: 1; color: var(--tan); }
 .ld-nav a.active { opacity: 1; color: var(--tan); }
 
-/* ── HAMBURGER (mobiel menu) ─────────────────────── */
 .ld-burger {
   display: none;
   flex-direction: column; justify-content: center; gap: 5px;
@@ -207,7 +186,6 @@ body.admin-bar .ld-header { top: 32px; }
   .ld-nav a:first-child { border-top: none; }
 }
 
-/* ── KNOPPEN ────────────────────────────────────── */
 .ld-btn {
   display: inline-flex; align-items: center; justify-content: center;
   font-family: 'Fraunces', Georgia, serif;
@@ -223,13 +201,11 @@ body.admin-bar .ld-header { top: 32px; }
 .ld .ld-btn--primary:hover { background: var(--tan); border-color: var(--tan); color: var(--paper); }
 .ld .ld-btn--ghost { background: transparent; color: var(--ink); }
 .ld .ld-btn--ghost:hover { background: var(--ink); color: var(--paper); }
-/* varianten op donkere achtergrond */
 .ld .ld-btn--paper { background: var(--paper); border-color: var(--paper); color: var(--ink); }
 .ld .ld-btn--paper:hover { background: var(--tan-lt); border-color: var(--tan-lt); color: var(--ink); }
 .ld .ld-btn--ghost-light { background: transparent; border-color: var(--line-light); color: var(--paper); }
 .ld .ld-btn--ghost-light:hover { background: var(--paper); border-color: var(--paper); color: var(--ink); }
 
-/* ── HERO ───────────────────────────────────────── */
 .ld-hero {
   padding-top: calc(68px + clamp(40px, 6vh, 72px));
   padding-bottom: clamp(30px, 5vh, 56px);
@@ -273,7 +249,6 @@ body.admin-bar .ld-header { top: 32px; }
   .ld-hero-img { aspect-ratio: 4 / 4.4; }
 }
 
-/* ── HOOFDSTUKKEN ───────────────────────────────── */
 .ld-ch {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -281,8 +256,7 @@ body.admin-bar .ld-header { top: 32px; }
   align-items: center;
   padding: clamp(56px, 8vh, 110px) 0;
 }
-.ld-ch--flip .ld-ch-img-wrap { order: -1; }   /* foto links, tekst rechts */
-.ld-ch-num {
+.ld-ch--flip .ld-ch-img-wrap { order: -1; }   .ld-ch-num {
   font-size: clamp(60px, 7vw, 96px);
   font-weight: 300;
   font-style: italic;
@@ -326,11 +300,9 @@ body.admin-bar .ld-header { top: 32px; }
 .ld-ch--flip .ld-ch-caption { text-align: left; }
 @media (max-width: 860px) {
   .ld-ch { grid-template-columns: 1fr; gap: 30px; }
-  .ld-ch--flip .ld-ch-img-wrap { order: 0; }   /* op mobiel: tekst boven foto */
-  .ld-ch-img { aspect-ratio: 4 / 3.4; }
+  .ld-ch--flip .ld-ch-img-wrap { order: 0; }     .ld-ch-img { aspect-ratio: 4 / 3.4; }
 }
 
-/* ── CTA (donker blok) ──────────────────────────── */
 .ld-cta {
   background: var(--coal);
   color: var(--paper);
@@ -360,7 +332,6 @@ body.admin-bar .ld-header { top: 32px; }
   margin-top: 34px;
 }
 
-/* ── FOOTER (donker) ────────────────────────────── */
 .ld-footer {
   background: var(--coal);
   color: var(--paper);
@@ -423,7 +394,6 @@ body.admin-bar .ld-header { top: 32px; }
   .ld-footer-cols { grid-template-columns: 1fr; }
 }
 
-/* ── LIGHTBOX ───────────────────────────────────── */
 .ld-hero-img img,
 .ld-ch-img img { cursor: zoom-in; }
 .ld-lb {
@@ -456,15 +426,13 @@ body.admin-bar .ld-header { top: 32px; }
 }
 .ld-lb-close:hover { color: #fff; }
 
-/* anker-offset voor vaste header */
 .ld [id] { scroll-margin-top: 84px; }
 html { scroll-behavior: smooth; }
 </style>
 
 <div class="ld">
 
-  <!-- ═══ HEADER ═══ -->
-  <header class="ld-header" id="ld-header">
+    <header class="ld-header" id="ld-header">
     <div class="ld-w ld-header-inner">
       <a href="/" class="ld-brand">Atelier <span>Depuydt</span></a>
       <nav class="ld-nav" id="ld-nav">
@@ -478,8 +446,7 @@ html { scroll-behavior: smooth; }
     </div>
   </header>
 
-  <!-- ═══ HERO ═══ -->
-  <section class="ld-hero" id="ld-top">
+    <section class="ld-hero" id="ld-top">
     <div class="ld-w ld-hero-grid">
       <div>
         <p class="ld-eyebrow ld-anim in">Over Luc</p>
@@ -501,8 +468,7 @@ html { scroll-behavior: smooth; }
 
   <div class="ld-sep"></div>
 
-  <!-- ═══ HET VERHAAL: DRAAD + HOOFDSTUKKEN ═══ -->
-  <div class="ld-story" id="ld-story">
+    <div class="ld-story" id="ld-story">
 
     <svg class="ld-thread" id="ld-thread" aria-hidden="true">
       <defs>
@@ -517,8 +483,7 @@ html { scroll-behavior: smooth; }
       </g>
     </svg>
 
-  <!-- ═══ HOOFDSTUK I — DE PAPLEPEL ═══ -->
-  <div class="ld-w">
+    <div class="ld-w">
     <section class="ld-ch ld-ch--flip">
       <div class="ld-ch-txt ld-anim">
         <div class="ld-ch-num">I.</div>
@@ -544,8 +509,7 @@ html { scroll-behavior: smooth; }
     </section>
   </div>
 
-  <!-- ═══ HOOFDSTUK II — OFF WAY ═══ -->
-  <div class="ld-w">
+    <div class="ld-w">
     <section class="ld-ch">
       <div class="ld-ch-txt ld-anim">
         <div class="ld-ch-num">II.</div>
@@ -572,8 +536,7 @@ html { scroll-behavior: smooth; }
     </section>
   </div>
 
-  <!-- ═══ HOOFDSTUK III — HET BLOED KRUIPT ═══ -->
-  <div class="ld-w">
+    <div class="ld-w">
     <section class="ld-ch ld-ch--flip">
       <div class="ld-ch-txt ld-anim">
         <div class="ld-ch-num">III.</div>
@@ -600,8 +563,7 @@ html { scroll-behavior: smooth; }
     </section>
   </div>
 
-  <!-- ═══ HOOFDSTUK IV — WATOU ═══ -->
-  <div class="ld-w">
+    <div class="ld-w">
     <section class="ld-ch">
       <div class="ld-ch-txt ld-anim">
         <div class="ld-ch-num">IV.</div>
@@ -627,8 +589,7 @@ html { scroll-behavior: smooth; }
     </section>
   </div>
 
-  <!-- ═══ HOOFDSTUK V — VANDAAG ═══ -->
-  <div class="ld-w">
+    <div class="ld-w">
     <section class="ld-ch ld-ch--flip">
       <div class="ld-ch-txt ld-anim">
         <div class="ld-ch-num">V.</div>
@@ -654,10 +615,8 @@ html { scroll-behavior: smooth; }
     </section>
   </div>
 
-  </div><!-- /ld-story -->
-
-  <!-- ═══ CTA ═══ -->
-  <section class="ld-cta">
+  </div>
+    <section class="ld-cta">
     <div class="ld-w">
       <p class="ld-eyebrow ld-anim">Maak kennis</p>
       <h2 class="ld-anim ld-anim-d1">Kom eens langs, <em>of stuur een berichtje</em></h2>
@@ -672,8 +631,7 @@ html { scroll-behavior: smooth; }
     </div>
   </section>
 
-  <!-- ═══ FOOTER ═══ -->
-  <footer class="ld-footer">
+    <footer class="ld-footer">
     <div class="ld-w">
       <div class="ld-footer-top">
         <div class="ld-footer-brand">
@@ -706,8 +664,7 @@ html { scroll-behavior: smooth; }
     </div>
   </footer>
 
-  <!-- ═══ LIGHTBOX ═══ -->
-  <div class="ld-lb" id="ld-lb" role="dialog" aria-modal="true" aria-label="Afbeelding vergroot bekijken">
+    <div class="ld-lb" id="ld-lb" role="dialog" aria-modal="true" aria-label="Afbeelding vergroot bekijken">
     <img id="ld-lb-img" src="" alt="">
     <button class="ld-lb-close" id="ld-lb-close" type="button" aria-label="Sluiten">&times;</button>
   </div>

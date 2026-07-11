@@ -1,10 +1,3 @@
-<!-- ═══════════════════════════════════════════════════════════
-     AMBACHTELIJK LEDER ATELIER DEPUYDT — CONTACT
-     Custom HTML-blok voor WordPress (Twenty Twenty-Five)
-     Prefix: .ld (zelfde stijl als de homepage)
-     ═══════════════════════════════════════════════════════════ -->
-
-<!-- Fix Twenty Twenty Five whitespace -->
 <style>
 .wp-site-blocks,
 .wp-site-blocks > *,
@@ -28,7 +21,6 @@ body.admin-bar .ld-header { top: 32px; }
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
 
 <style>
-/* ── TOKENS ─────────────────────────────────────── */
 .ld {
   --ink:    #241d16;
   --coal:   #2b2118;
@@ -40,8 +32,8 @@ body.admin-bar .ld-header { top: 32px; }
   --line:   rgba(36,29,22,.14);
   --line-d: rgba(36,29,22,.22);
   --line-light: rgba(244,242,237,.18);
-  --stitch: #d0beac;                   /* effen leder-stiksel (op licht) — overal gelijk */
-  --stitch-lt: #6e5c46;                /* stiksel op donkere blokken */
+  --stitch: #d0beac;
+  --stitch-lt: #6e5c46;
   font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
   background: var(--paper);
   color: var(--ink);
@@ -52,7 +44,6 @@ body.admin-bar .ld-header { top: 32px; }
 .ld img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .ld .ld-w { max-width: 1200px; margin-inline: auto; padding-inline: clamp(20px, 4vw, 48px); }
 
-/* korrel-textuur */
 .ld { position: relative; }
 .ld::after {
   content: "";
@@ -74,7 +65,6 @@ body.admin-bar .ld-header { top: 32px; }
   width: 88px; margin: 26px 0;
 }
 
-/* ── ANIMATIES ──────────────────────────────────── */
 .ld-anim {
   opacity: 0; transform: translateY(24px);
   transition: opacity .85s cubic-bezier(.22,1,.36,1), transform .85s cubic-bezier(.22,1,.36,1);
@@ -83,7 +73,6 @@ body.admin-bar .ld-header { top: 32px; }
 .ld-anim-d1 { transition-delay: .12s; }
 .ld-anim-d2 { transition-delay: .24s; }
 
-/* ── HEADER ─────────────────────────────────────── */
 .ld-header {
   position: fixed; top: 0; left: 0; right: 0;
   z-index: 9999; height: 68px;
@@ -92,7 +81,6 @@ body.admin-bar .ld-header { top: 32px; }
   backdrop-filter: blur(6px);
   font-family: 'Fraunces', Georgia, serif; color: var(--ink);
 }
-/* gestikte scheidingslijn onderaan de header */
 .ld-header::after {
   content: "";
   position: absolute; left: 0; right: 0; bottom: 0;
@@ -113,7 +101,6 @@ body.admin-bar .ld-header { top: 32px; }
 .ld-nav a:hover { opacity: 1; color: var(--tan); }
 .ld-nav a.active { opacity: 1; color: var(--tan); }
 
-/* ── HAMBURGER (mobiel menu) ─────────────────────── */
 .ld-burger {
   display: none;
   flex-direction: column; justify-content: center; gap: 5px;
@@ -154,7 +141,6 @@ body.admin-bar .ld-header { top: 32px; }
   .ld-nav a:first-child { border-top: none; }
 }
 
-/* ── CONTACT ────────────────────────────────────── */
 .ld-contact {
   padding-top: calc(68px + clamp(44px, 7vh, 84px));
   padding-bottom: clamp(60px, 9vh, 110px);
@@ -200,7 +186,6 @@ body.admin-bar .ld-header { top: 32px; }
   .ld-contact-grid { grid-template-columns: 1fr; }
 }
 
-/* ── KAART ──────────────────────────────────────── */
 .ld-map {
   padding-bottom: clamp(60px, 9vh, 110px);
 }
@@ -226,7 +211,6 @@ body.admin-bar .ld-header { top: 32px; }
   .ld-map-frame { aspect-ratio: 3 / 4; }
 }
 
-/* ── FORMINATOR ─────────────────────────────────── */
 .ld .forminator-custom-form,
 .ld .forminator-ui.forminator-custom-form { font-family: 'Fraunces', Georgia, serif !important; }
 .ld .forminator-custom-form .forminator-label,
@@ -272,7 +256,6 @@ body.admin-bar .ld-header { top: 32px; }
 .ld .forminator-custom-form .forminator-response-message.forminator-success p { color: var(--tan) !important; font-family: 'Fraunces', Georgia, serif !important; }
 .ld .forminator-custom-form .forminator-error-message { font-family: 'Fraunces', Georgia, serif !important; }
 
-/* ── FOOTER ─────────────────────────────────────── */
 .ld-footer {
   background: var(--coal); color: var(--paper);
   border-top: 2px dashed var(--line-light);
@@ -307,8 +290,7 @@ html { scroll-behavior: smooth; }
 
 <div class="ld">
 
-  <!-- ═══ HEADER ═══ -->
-  <header class="ld-header" id="ld-header">
+    <header class="ld-header" id="ld-header">
     <div class="ld-w ld-header-inner">
       <a href="/" class="ld-brand">Atelier <span>Depuydt</span></a>
       <nav class="ld-nav" id="ld-nav">
@@ -322,8 +304,7 @@ html { scroll-behavior: smooth; }
     </div>
   </header>
 
-  <!-- ═══ CONTACT ═══ -->
-  <section class="ld-contact">
+    <section class="ld-contact">
     <div class="ld-w">
       <div class="ld-contact-head ld-anim in">
         <p class="ld-eyebrow">Contact</p>
@@ -367,8 +348,7 @@ html { scroll-behavior: smooth; }
     </div>
   </section>
 
-  <!-- ═══ KAART ═══ -->
-  <section class="ld-map">
+    <section class="ld-map">
     <div class="ld-w">
       <div class="ld-map-head ld-anim in">
         <p class="ld-eyebrow">Kom langs</p>
@@ -385,8 +365,7 @@ html { scroll-behavior: smooth; }
     </div>
   </section>
 
-  <!-- ═══ FOOTER ═══ -->
-  <footer class="ld-footer">
+    <footer class="ld-footer">
     <div class="ld-w">
       <div class="ld-footer-top">
         <div class="ld-footer-brand">

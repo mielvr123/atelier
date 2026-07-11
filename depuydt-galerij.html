@@ -1,10 +1,3 @@
-<!-- ═══════════════════════════════════════════════════════════
-     AMBACHTELIJK LEDER ATELIER DEPUYDT — GALERIJ
-     Custom HTML-blok voor WordPress (Twenty Twenty-Five)
-     Prefix: .ld (zelfde stijl als de homepage)
-     ═══════════════════════════════════════════════════════════ -->
-
-<!-- Fix Twenty Twenty Five whitespace -->
 <style>
 .wp-site-blocks,
 .wp-site-blocks > *,
@@ -28,7 +21,6 @@ body.admin-bar .ld-header { top: 32px; }
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
 
 <style>
-/* ── TOKENS ─────────────────────────────────────── */
 .ld {
   --ink:    #241d16;
   --coal:   #2b2118;
@@ -40,8 +32,8 @@ body.admin-bar .ld-header { top: 32px; }
   --line:   rgba(36,29,22,.14);
   --line-d: rgba(36,29,22,.22);
   --line-light: rgba(244,242,237,.18);
-  --stitch: #d0beac;                   /* effen leder-stiksel (op licht) — overal gelijk */
-  --stitch-lt: #6e5c46;                /* stiksel op donkere blokken */
+  --stitch: #d0beac;
+  --stitch-lt: #6e5c46;
   font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
   background: var(--paper);
   color: var(--ink);
@@ -52,7 +44,6 @@ body.admin-bar .ld-header { top: 32px; }
 .ld img { display: block; width: 100%; }
 .ld .ld-w { max-width: 1400px; margin-inline: auto; padding-inline: clamp(16px, 3vw, 40px); }
 
-/* korrel-textuur */
 .ld { position: relative; }
 .ld::after {
   content: "";
@@ -64,7 +55,6 @@ body.admin-bar .ld-header { top: 32px; }
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.06'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* ── ANIMATIES ──────────────────────────────────── */
 .ld-anim {
   opacity: 0;
   transform: translateY(22px);
@@ -72,7 +62,6 @@ body.admin-bar .ld-header { top: 32px; }
 }
 .ld-anim.in { opacity: 1; transform: translateY(0); }
 
-/* ── HEADER ─────────────────────────────────────── */
 .ld-header {
   position: fixed; top: 0; left: 0; right: 0;
   z-index: 9999;
@@ -83,7 +72,6 @@ body.admin-bar .ld-header { top: 32px; }
   font-family: 'Fraunces', Georgia, serif;
   color: var(--ink);
 }
-/* gestikte scheidingslijn onderaan de header */
 .ld-header::after {
   content: "";
   position: absolute; left: 0; right: 0; bottom: 0;
@@ -107,7 +95,6 @@ body.admin-bar .ld-header { top: 32px; }
 .ld-nav a:hover { opacity: 1; color: var(--tan); }
 .ld-nav a.active { opacity: 1; color: var(--tan); }
 
-/* ── HAMBURGER (mobiel menu) ─────────────────────── */
 .ld-burger {
   display: none;
   flex-direction: column; justify-content: center; gap: 5px;
@@ -148,13 +135,10 @@ body.admin-bar .ld-header { top: 32px; }
   .ld-nav a:first-child { border-top: none; }
 }
 
-/* ── GALERIJ (masonry) ──────────────────────────── */
 .ld-gal {
   padding-top: calc(68px + clamp(24px, 4vh, 48px));
   padding-bottom: clamp(40px, 7vh, 90px);
 }
-/* Strak grid met vaste vakken: elke rij sluit vlak af, geen gaten.
-   Foto's vullen hun vak (object-fit: cover); volledig beeld in de lightbox. */
 .ld-gal-masonry {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -183,7 +167,6 @@ body.admin-bar .ld-header { top: 32px; }
   }
 }
 
-/* ── FOOTER ─────────────────────────────────────── */
 .ld-footer {
   background: var(--coal);
   color: var(--paper);
@@ -227,7 +210,6 @@ body.admin-bar .ld-header { top: 32px; }
 @media (max-width: 860px) { .ld-footer-top { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .ld-footer-cols { grid-template-columns: 1fr; } }
 
-/* ── LIGHTBOX ───────────────────────────────────── */
 .ld-lb {
   position: fixed; inset: 0; z-index: 10000;
   display: none; align-items: center; justify-content: center;
@@ -266,8 +248,7 @@ html { scroll-behavior: smooth; }
 
 <div class="ld">
 
-  <!-- ═══ HEADER ═══ -->
-  <header class="ld-header" id="ld-header">
+    <header class="ld-header" id="ld-header">
     <div class="ld-header-inner">
       <a href="/" class="ld-brand">Atelier <span>Depuydt</span></a>
       <nav class="ld-nav" id="ld-nav">
@@ -281,8 +262,7 @@ html { scroll-behavior: smooth; }
     </div>
   </header>
 
-  <!-- ═══ GALERIJ ═══ -->
-  <section class="ld-gal">
+    <section class="ld-gal">
     <div class="ld-w">
       <div class="ld-gal-masonry" id="ld-gal">
         <div class="ld-gal-it ld-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4433-scaled.jpg" alt="Handgemaakt lederwerk"></div>
@@ -323,8 +303,7 @@ html { scroll-behavior: smooth; }
     </div>
   </section>
 
-  <!-- ═══ FOOTER ═══ -->
-  <footer class="ld-footer">
+    <footer class="ld-footer">
     <div class="ld-w">
       <div class="ld-footer-top">
         <div class="ld-footer-brand">
@@ -357,8 +336,7 @@ html { scroll-behavior: smooth; }
     </div>
   </footer>
 
-  <!-- ═══ LIGHTBOX ═══ -->
-  <div class="ld-lb" id="ld-lb" role="dialog" aria-modal="true" aria-label="Afbeelding vergroot bekijken">
+    <div class="ld-lb" id="ld-lb" role="dialog" aria-modal="true" aria-label="Afbeelding vergroot bekijken">
     <img id="ld-lb-img" src="" alt="">
     <button class="ld-lb-nav ld-lb-prev" id="ld-lb-prev" type="button" aria-label="Vorige">&lsaquo;</button>
     <button class="ld-lb-nav ld-lb-next" id="ld-lb-next" type="button" aria-label="Volgende">&rsaquo;</button>

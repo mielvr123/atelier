@@ -1,12 +1,4 @@
-<!-- ═══════════════════════════════════════════════════════════
-     AMBACHTELIJK LEDER ATELIER DEPUYDT — HOMEPAGE
-     Custom HTML-blok voor WordPress (Twenty Twenty-Five)
-     Prefix: .ld
-     ═══════════════════════════════════════════════════════════ -->
-
-<!-- Fix Twenty Twenty Five whitespace -->
 <style>
-/* TT25 FSE resets */
 .wp-site-blocks,
 .wp-site-blocks > *,
 .wp-block-post-content,
@@ -18,7 +10,6 @@
   padding-top: 0 !important;
   margin-top: 0 !important;
 }
-/* Admin bar offset for fixed header */
 body.admin-bar .ld-header { top: 32px; }
 @media screen and (max-width: 782px) {
   body.admin-bar .ld-header { top: 46px; }
@@ -30,35 +21,32 @@ body.admin-bar .ld-header { top: 32px; }
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
 
 <style>
-/* ── TOKENS ─────────────────────────────────────── */
 .ld {
-  --ink:    #241d16;          /* donkere inkt, warm */
-  --coal:   #2b2118;          /* donker accentblok / footer */
-  --paper:  #f4f2ed;          /* zacht gebroken wit (paginakleur) */
-  --paper2: #eae7e0;          /* iets dieper, voor afwisseling */
-  --brown:  #3d2b1c;          /* warm bruin accentblok */
-  --tan:    #7d4419;          /* donker cognac leder (accent) */
-  --tan-lt: #bd8850;          /* licht leder, op donker */
-  --smoke:  #867d71;          /* gedempt grijsbruin */
+  --ink:    #241d16;
+  --coal:   #2b2118;
+  --paper:  #f4f2ed;
+  --paper2: #eae7e0;
+  --brown:  #3d2b1c;
+  --tan:    #7d4419;
+  --tan-lt: #bd8850;
+  --smoke:  #867d71;
   --line:   rgba(36,29,22,.14);
-  --line-d: rgba(36,29,22,.22);        /* donkere haarlijn (op licht) */
-  --line-light: rgba(239,233,221,.18); /* lichte haarlijn (op donker) */
-  --stitch: #d0beac;                   /* effen leder-stiksel (op licht) — overal gelijk */
-  --stitch-lt: #6e5c46;                /* stiksel op donkere blokken */
+  --line-d: rgba(36,29,22,.22);
+  --line-light: rgba(239,233,221,.18);
+  --stitch: #d0beac;
+  --stitch-lt: #6e5c46;
   font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
   background: var(--paper);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── RESET ──────────────────────────────────────── */
 .ld *, .ld *::before, .ld *::after { box-sizing: border-box; margin: 0; padding: 0; }
 .ld a { text-decoration: none; color: inherit; }
 .ld img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 .ld .ld-w  { max-width: 1200px; margin-inline: auto; padding-inline: clamp(20px, 4vw, 48px); }
 
-/* korrel-textuur over de hele pagina */
 .ld { position: relative; }
 .ld::after {
   content: "";
@@ -66,11 +54,10 @@ body.admin-bar .ld-header { top: 32px; }
   pointer-events: none;
   z-index: 5;
   opacity: .35;
-  transform: translateZ(0);  /* eigen composietlaag, geen repaint bij scroll */
+  transform: translateZ(0);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.06'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* letterspaced label / kapittel-opschrift */
 .ld .ld-eyebrow {
   font-family: Georgia, serif;
   font-size: 12px;
@@ -78,9 +65,7 @@ body.admin-bar .ld-header { top: 32px; }
   text-transform: uppercase;
   color: var(--tan);
 }
-.ld .ld-eyebrow--light { color: var(--tan-lt); }   /* op donkere blokken */
-
-/* stiksel-lijn (zadelsteek) — steken dichter bij elkaar, in gedempt leder */
+.ld .ld-eyebrow--light { color: var(--tan-lt); }   
 .ld .ld-stitch {
   --stitch-color: var(--stitch);
   border: none;
@@ -93,8 +78,6 @@ body.admin-bar .ld-header { top: 32px; }
 .ld .ld-stitch--dark { --stitch-color: var(--stitch); }
 .ld .ld-stitch--center { margin-inline: auto; }
 
-/* stiksel over de volledige paginabreedte, tussen secties
-   — zelfde dikte, kleur en patroon als de sectie-stiksels */
 .ld .ld-sep {
   --stitch-color: var(--stitch);
   height: 2px;
@@ -102,7 +85,6 @@ body.admin-bar .ld-header { top: 32px; }
     var(--stitch-color) 0 7px, transparent 7px 15px);
 }
 
-/* ── HET VERHAAL (teaser naar Over Luc) ─────────── */
 .ld-verhaal { padding: clamp(60px, 9vh, 120px) 0; }
 .ld-verhaal-grid {
   display: grid;
@@ -142,7 +124,6 @@ body.admin-bar .ld-header { top: 32px; }
   text-transform: uppercase;
   color: var(--smoke);
 }
-/* gebogen stiksel-pijl met naald, wijzend naar de knop */
 .ld-verhaal-cta { margin-top: 6px; }
 .ld-arrow {
   display: block;
@@ -156,7 +137,6 @@ body.admin-bar .ld-header { top: 32px; }
   .ld-verhaal-img .ph { aspect-ratio: 4 / 3.4; }
 }
 
-/* ── GALERIJ (teaser) ───────────────────────────── */
 .ld-galt { padding: clamp(72px, 11vh, 130px) 0; }
 .ld-galt-head {
   display: flex; flex-wrap: wrap; gap: 20px;
@@ -194,7 +174,6 @@ body.admin-bar .ld-header { top: 32px; }
   .ld-galt-side .ph { aspect-ratio: 4 / 3.4; }
 }
 
-/* ── ANIMATIES ──────────────────────────────────── */
 .ld-anim {
   opacity: 0;
   transform: translateY(26px);
@@ -205,7 +184,6 @@ body.admin-bar .ld-header { top: 32px; }
 .ld-anim-d2 { transition-delay: .24s; }
 .ld-anim-d3 { transition-delay: .38s; }
 
-/* ── HEADER ─────────────────────────────────────── */
 .ld-header {
   position: fixed; top: 0; left: 0; right: 0;
   z-index: 9999;
@@ -216,7 +194,6 @@ body.admin-bar .ld-header { top: 32px; }
   font-family: 'Fraunces', Georgia, serif;
   color: var(--ink);
 }
-/* gestikte scheidingslijn onderaan de header */
 .ld-header::after {
   content: "";
   position: absolute; left: 0; right: 0; bottom: 0;
@@ -245,7 +222,6 @@ body.admin-bar .ld-header { top: 32px; }
 }
 .ld-nav a:hover { opacity: 1; color: var(--tan); }
 
-/* ── HAMBURGER (mobiel menu) ─────────────────────── */
 .ld-burger {
   display: none;
   flex-direction: column; justify-content: center; gap: 5px;
@@ -286,17 +262,13 @@ body.admin-bar .ld-header { top: 32px; }
   .ld-nav a:first-child { border-top: none; }
 }
 
-/* ── HERO: tekst gecentreerd op effen papier, zwevende foto's ── */
 .ld-hero {
   position: relative;
-  margin-top: 68px;                        /* onder de vaste header */
-  min-height: clamp(720px, calc(100vh - 68px), 980px);
+  margin-top: 68px;                          min-height: clamp(720px, calc(100vh - 68px), 980px);
   min-height: clamp(720px, calc(100svh - 68px), 980px);
   overflow: hidden;
   background: var(--paper);
 }
-/* verankert de foto's aan een gecentreerde kolom, zodat hun afstand
-   tot de tekst gelijk blijft — ook op erg brede schermen */
 .ld-hero-inner {
   position: absolute; inset: 0;
   max-width: 1760px; margin-inline: auto;
@@ -330,7 +302,6 @@ body.admin-bar .ld-header { top: 32px; }
   margin-top: 30px;
 }
 
-/* zwevende editorial-foto's aan weerszijden */
 .ld-hero-gallery { display: contents; }
 .ld-hero-ph {
   position: absolute;
@@ -340,23 +311,18 @@ body.admin-bar .ld-header { top: 32px; }
   transition: transform .5s cubic-bezier(.22,1,.36,1);
 }
 .ld-hero-ph img { object-fit: cover; filter: saturate(.92); }
-/* boven = staande foto; links & rechts exact hetzelfde formaat */
 .ld-hero-ph--1, .ld-hero-ph--3 {
   width: clamp(310px, 27vw, 380px); aspect-ratio: 4 / 5;
   top: 7%;
 }
-/* onder = liggende foto, over de bovenste heen; links & rechts identiek */
 .ld-hero-ph--2, .ld-hero-ph--4 {
   width: clamp(350px, 30vw, 435px); aspect-ratio: 5 / 4;
   top: 52%; z-index: 2;
 }
-/* linkerkant */
 .ld-hero-ph--1 { left: 1%;   transform: rotate(-5deg); }
 .ld-hero-ph--2 { left: 4.5%; transform: rotate(4deg); }
-/* rechterkant — exact gespiegeld (positie + rotatie) */
 .ld-hero-ph--3 { right: 1%;   transform: rotate(5deg); }
 .ld-hero-ph--4 { right: 4.5%; transform: rotate(-4deg); }
-/* smallere desktops: foto's iets terug naar de rand, weg van de tekst */
 @media (max-width: 1600px) {
   .ld-hero-ph--1 { left: 0.5%; }
   .ld-hero-ph--2 { left: 2%; }
@@ -398,10 +364,8 @@ body.admin-bar .ld-header { top: 32px; }
 .ld .ld-btn--ghost { background: transparent; color: var(--ink); }
 .ld .ld-btn--ghost:hover { background: var(--ink); color: var(--paper); }
 @media (max-width: 860px) {
-  .ld-hero h1 { white-space: normal; }   /* titel mag afbreken op gsm */
-}
+  .ld-hero h1 { white-space: normal; }   }
 
-/* ── CITAAT / MANIFEST ──────────────────────────── */
 .ld-quote {
   padding: clamp(90px, 14vh, 160px) 0;
   text-align: center;
@@ -423,7 +387,6 @@ body.admin-bar .ld-header { top: 32px; }
   color: var(--smoke);
 }
 
-/* ── BREED BEELD (tussenstrook) ─────────────────── */
 .ld-wide {
   position: relative;
   height: clamp(320px, 60vh, 560px);
@@ -432,7 +395,6 @@ body.admin-bar .ld-header { top: 32px; }
 }
 .ld-wide img { filter: saturate(.85); object-position: center 72%; }
 
-/* ── OP MAAT (dieper crème blok) ────────────────── */
 .ld-maat {
   background: var(--paper2);
   color: var(--ink);
@@ -517,7 +479,6 @@ body.admin-bar .ld-header { top: 32px; }
   .ld-maat-img { aspect-ratio: 4 / 3.2; }
 }
 
-/* ── WATOU / EXPO (donker accentblok, zoals footer) ─ */
 .ld-watou {
   background: var(--coal);
   color: var(--paper);
@@ -543,7 +504,6 @@ body.admin-bar .ld-header { top: 32px; }
   color: rgba(239,233,221,.82);
 }
 
-/* ── LUC IN DE KRANT (pers) ─────────────────────── */
 .ld-press {
   padding: clamp(72px, 11vh, 130px) 0;
 }
@@ -611,7 +571,6 @@ body.admin-bar .ld-header { top: 32px; }
   .ld-press-grid { grid-template-columns: 1fr; }
 }
 
-/* ── CONTACT ────────────────────────────────────── */
 .ld-contact {
   background: var(--paper);
   color: var(--ink);
@@ -643,7 +602,6 @@ body.admin-bar .ld-header { top: 32px; }
   .ld-contact-grid { grid-template-columns: 1fr; }
 }
 
-/* ── FORMINATOR (formulier in stijl van de pagina) ─ */
 .ld-form { padding-top: 6px; }
 .ld .forminator-custom-form,
 .ld .forminator-ui.forminator-custom-form {
@@ -718,7 +676,6 @@ body.admin-bar .ld-header { top: 32px; }
   font-family: 'Fraunces', Georgia, serif !important;
 }
 
-/* ── FOOTER (donker) ────────────────────────────── */
 .ld-footer {
   background: var(--coal);
   color: var(--paper);
@@ -781,7 +738,6 @@ body.admin-bar .ld-header { top: 32px; }
   .ld-footer-cols { grid-template-columns: 1fr; }
 }
 
-/* ── LIGHTBOX ───────────────────────────────────── */
 .ld-maat-slide img,
 .ld-verhaal-img img,
 .ld-galt-grid img,
@@ -816,15 +772,13 @@ body.admin-bar .ld-header { top: 32px; }
 }
 .ld-lb-close:hover { color: #fff; }
 
-/* anker-offset voor vaste header */
 .ld [id] { scroll-margin-top: 84px; }
 html { scroll-behavior: smooth; }
 </style>
 
 <div class="ld">
 
-  <!-- ═══ HEADER ═══ -->
-  <header class="ld-header" id="ld-header">
+    <header class="ld-header" id="ld-header">
     <div class="ld-w ld-header-inner">
       <a href="#ld-top" class="ld-brand">Atelier <span>Depuydt</span></a>
       <nav class="ld-nav" id="ld-nav">
@@ -838,8 +792,7 @@ html { scroll-behavior: smooth; }
     </div>
   </header>
 
-  <!-- ═══ HERO ═══ -->
-  <section class="ld-hero" id="ld-top">
+    <section class="ld-hero" id="ld-top">
     <div class="ld-hero-inner">
       <div class="ld-hero-head ld-anim in ld-anim-d1">
         <h1>Leder, getekend <em>door ambacht.</em></h1>
@@ -863,8 +816,7 @@ html { scroll-behavior: smooth; }
 
   <div class="ld-sep"></div>
 
-  <!-- ═══ CITAAT ═══ -->
-  <section class="ld-quote" id="verhaal">
+    <section class="ld-quote" id="verhaal">
     <div class="ld-w">
       <figure>
         <blockquote class="ld-anim ld-anim-d1">
@@ -878,8 +830,7 @@ html { scroll-behavior: smooth; }
 
   <div class="ld-sep"></div>
 
-  <!-- ═══ HET VERHAAL (teaser naar Over Luc) ═══ -->
-  <section class="ld-verhaal">
+    <section class="ld-verhaal">
     <div class="ld-w ld-verhaal-grid">
       <div class="ld-verhaal-txt ld-anim">
         <p class="ld-eyebrow">Het verhaal</p>
@@ -916,13 +867,11 @@ html { scroll-behavior: smooth; }
     </div>
   </section>
 
-  <!-- ═══ BREED BEELD ═══ -->
-  <section class="ld-wide">
+    <section class="ld-wide">
     <img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4429-scaled.jpg" alt="Detail van handgemaakt lederwerk" loading="lazy">
   </section>
 
-  <!-- ═══ OP MAAT ═══ -->
-  <section class="ld-maat" id="opmaat">
+    <section class="ld-maat" id="opmaat">
     <div class="ld-w">
       <div class="ld-maat-head ld-anim">
         <p class="ld-eyebrow ld-eyebrow--dark">Handwerk, op vraag</p>
@@ -983,8 +932,7 @@ html { scroll-behavior: smooth; }
     </div>
   </section>
 
-  <!-- ═══ GALERIJ (teaser) ═══ -->
-  <section class="ld-galt" id="galerij">
+    <section class="ld-galt" id="galerij">
     <div class="ld-w">
       <div class="ld-galt-head ld-anim">
         <div>
@@ -1011,8 +959,7 @@ html { scroll-behavior: smooth; }
     </div>
   </section>
 
-  <!-- ═══ WATOU / EXPO ═══ -->
-  <section class="ld-watou">
+    <section class="ld-watou">
     <div class="ld-w">
       <p class="ld-eyebrow ld-anim">Luc in actie</p>
       <h2 class="ld-anim ld-anim-d1">Te gast in <em>Watou,</em> tussen de kunstenaars</h2>
@@ -1026,8 +973,7 @@ html { scroll-behavior: smooth; }
     </div>
   </section>
 
-  <!-- ═══ LUC IN DE KRANT ═══ -->
-  <section class="ld-press" id="pers">
+    <section class="ld-press" id="pers">
     <div class="ld-w">
       <div class="ld-press-head ld-anim">
         <p class="ld-eyebrow">In de pers</p>
@@ -1060,8 +1006,7 @@ html { scroll-behavior: smooth; }
 
   <div class="ld-sep"></div>
 
-  <!-- ═══ CONTACT ═══ -->
-  <section class="ld-contact" id="contact">
+    <section class="ld-contact" id="contact">
     <div class="ld-w ld-contact-grid">
       <div class="ld-anim">
         <p class="ld-eyebrow">Contact</p>
@@ -1078,8 +1023,7 @@ html { scroll-behavior: smooth; }
     </div>
   </section>
 
-  <!-- ═══ FOOTER ═══ -->
-  <footer class="ld-footer">
+    <footer class="ld-footer">
     <div class="ld-w">
       <div class="ld-footer-top">
         <div class="ld-footer-brand">
@@ -1112,8 +1056,7 @@ html { scroll-behavior: smooth; }
     </div>
   </footer>
 
-  <!-- ═══ LIGHTBOX ═══ -->
-  <div class="ld-lb" id="ld-lb" role="dialog" aria-modal="true" aria-label="Afbeelding vergroot bekijken">
+    <div class="ld-lb" id="ld-lb" role="dialog" aria-modal="true" aria-label="Afbeelding vergroot bekijken">
     <img id="ld-lb-img" src="" alt="">
     <button class="ld-lb-close" id="ld-lb-close" type="button" aria-label="Sluiten">&times;</button>
   </div>
