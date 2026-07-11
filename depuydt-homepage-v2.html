@@ -41,14 +41,6 @@ body.admin-bar .lx-header { top: 32px; }
 .lx .lx-w { max-width: 1320px; margin-inline: auto; padding-inline: clamp(20px, 4vw, 56px); }
 .lx .lx-serif { font-family: 'Cormorant Garamond', Georgia, serif; }
 
-.lx .lx-label {
-  font-size: 11px;
-  letter-spacing: .34em;
-  text-transform: uppercase;
-  color: var(--cognac);
-  font-weight: 500;
-}
-
 .lx-anim {
   opacity: 0;
   transform: translateY(30px);
@@ -435,11 +427,11 @@ body.admin-bar .lx-header { top: 32px; }
 .lx-quote blockquote strong {
   font-weight: 400; font-style: normal; color: var(--cognac);
 }
-.lx-quote figcaption {
+.lx-quote-name {
   margin-top: 34px;
-  font-size: 11px;
-  letter-spacing: .34em;
-  text-transform: uppercase;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
+  font-style: italic;
   color: var(--bone-dim);
 }
 
@@ -485,7 +477,14 @@ body.admin-bar .lx-header { top: 32px; }
 .lx-press {
   padding: clamp(80px, 12vh, 150px) 0 clamp(100px, 15vh, 180px);
 }
-.lx-press .lx-label { display: block; text-align: center; }
+.lx-press-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(34px, 4.2vw, 56px);
+  font-weight: 300;
+  line-height: 1.05;
+  text-align: center;
+}
+.lx-press-title em { font-style: italic; color: var(--cognac); }
 .lx-press-grid {
   margin-top: clamp(40px, 6vh, 64px);
   display: grid;
@@ -757,8 +756,7 @@ html { scroll-behavior: smooth; }
       <img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4458-scaled.jpg" alt="Luc Depuydt aan het werk in zijn atelier">
     </div>
     <div class="lx-w lx-hero-content">
-      <p class="lx-label lx-anim in">Ambachtelijk Leder Atelier — Watou</p>
-      <h1 class="lx-anim in lx-anim-d1" style="margin-top:22px;">Leder, getekend <em>door ambacht.</em></h1>
+      <h1 class="lx-anim in lx-anim-d1">Leder, getekend <em>door ambacht.</em></h1>
       <div class="lx-hero-row lx-anim in lx-anim-d2">
         <p class="lx-hero-sub">
           Luc Depuydt bewerkt het leder nog met de hand, met traditioneel
@@ -779,7 +777,6 @@ html { scroll-behavior: smooth; }
   <section class="lx-intro" id="verhaal">
     <div class="lx-w lx-intro-grid">
       <div class="lx-anim">
-        <p class="lx-label">Het verhaal</p>
         <h2>Generaties vol <em>vakmanschap</em></h2>
         <hr class="lx-stitch">
         <p class="t">
@@ -821,7 +818,6 @@ html { scroll-behavior: smooth; }
     <div class="lx-w">
       <div class="lx-maat-head lx-anim">
         <div>
-          <p class="lx-label">Handwerk, op vraag</p>
           <h2>Alles <em>op maat.</em></h2>
           <hr class="lx-stitch">
         </div>
@@ -858,12 +854,12 @@ html { scroll-behavior: smooth; }
     </div>
     <div class="lx-w">
       <figure>
-        <p class="lx-label lx-anim">Luc Depuydt</p>
-        <hr class="lx-stitch lx-stitch--center lx-anim lx-anim-d1">
+        <hr class="lx-stitch lx-stitch--center lx-anim">
         <blockquote class="lx-anim lx-anim-d1">
           &ldquo;Van vader op zoon heb ik altijd met leder gewerkt.
           <strong>Ik maakte er mijn beroep van.</strong>&rdquo;
         </blockquote>
+        <figcaption class="lx-quote-name lx-anim lx-anim-d2">Luc Depuydt</figcaption>
       </figure>
     </div>
   </section>
@@ -874,7 +870,6 @@ html { scroll-behavior: smooth; }
         <img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4702-scaled.jpg" alt="Luc Depuydt in de deuropening van zijn lederatelier" loading="lazy">
       </div>
       <div class="lx-anim lx-anim-d1">
-        <p class="lx-label">Luc in actie</p>
         <h2>Te gast in <em>Watou,</em> tussen de kunstenaars</h2>
         <hr class="lx-stitch">
         <p class="t">
@@ -892,7 +887,7 @@ html { scroll-behavior: smooth; }
 
   <section class="lx-press" id="pers">
     <div class="lx-w">
-      <p class="lx-label lx-anim">Luc in de krant</p>
+      <h2 class="lx-press-title lx-anim">Luc <em>in de krant</em></h2>
       <div class="lx-press-grid">
         <a class="lx-press-card lx-anim" href="https://kw.be/nieuws/cultuur/luc-depuydt-en-bruno-deman-stellen-tentoon-op-kleine-markt-tijdens-kunstzomer-van-watou/" target="_blank" rel="noopener">
           <img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/4564789.webp" alt="Krantenartikel over Luc Depuydt en Bruno Deman tijdens de kunstzomer van Watou" loading="lazy">
@@ -913,7 +908,6 @@ html { scroll-behavior: smooth; }
   <section class="lx-contact" id="contact">
     <div class="lx-w lx-contact-grid">
       <div class="lx-anim">
-        <p class="lx-label">Contact</p>
         <h2>Iets op maat <em>in gedachten?</em></h2>
         <hr class="lx-stitch">
         <p class="lx-contact-intro">
