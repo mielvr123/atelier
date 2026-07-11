@@ -29,6 +29,7 @@ body.admin-bar .lx-header { top: 32px; }
   --cognac:  #c98b4e;
   --cognac-deep: #9a6132;
   --hair:    rgba(236,229,218,.14);
+  --stitch:  #6e5c46;
   font-family: 'Archivo', Helvetica, Arial, sans-serif;
   background: var(--night);
   color: var(--bone);
@@ -65,7 +66,13 @@ body.admin-bar .lx-header { top: 32px; }
   display: flex; align-items: center;
   background: linear-gradient(180deg, rgba(22,17,13,.92), rgba(22,17,13,.75));
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--hair);
+}
+.lx-header::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background-image: repeating-linear-gradient(90deg,
+    var(--stitch) 0 7px, transparent 7px 15px);
 }
 .lx-header-inner {
   display: flex; align-items: center; justify-content: space-between;
@@ -112,9 +119,12 @@ body.admin-bar .lx-header { top: 32px; }
     padding: 6px clamp(20px, 4vw, 56px) 18px;
     background: rgba(22,17,13,.97);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--hair);
     transform: translateY(-14px); opacity: 0; pointer-events: none;
     transition: opacity .28s ease, transform .28s ease;
+  }
+  .lx-nav::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+    background-image: repeating-linear-gradient(90deg, var(--stitch) 0 7px, transparent 7px 15px);
   }
   .lx-nav.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
   .lx-nav a {
@@ -212,34 +222,21 @@ body.admin-bar .lx-header { top: 32px; }
 .lx .lx-btn--solid { background: var(--cognac); border-color: var(--cognac); color: var(--night); }
 .lx .lx-btn--solid:hover { background: var(--bone); border-color: var(--bone); }
 
-.lx-marquee {
-  border-top: 1px solid var(--hair);
-  border-bottom: 1px solid var(--hair);
-  padding: 22px 0;
-  overflow: hidden;
-  white-space: nowrap;
+.lx .lx-stitch {
+  border: none;
+  height: 2px;
+  background-image: repeating-linear-gradient(90deg,
+    var(--stitch) 0 7px, transparent 7px 15px);
+  width: 88px;
+  margin: 26px 0;
 }
-.lx-marquee-track {
-  display: inline-block;
-  animation: lxMarquee 40s linear infinite;
-}
-.lx-marquee span {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(18px, 2.4vw, 26px);
-  font-style: italic;
-  font-weight: 300;
-  color: var(--bone-dim);
-  padding-inline: 34px;
-}
-.lx-marquee b {
-  color: var(--cognac);
-  font-weight: 400;
-}
-@keyframes lxMarquee {
-  to { transform: translateX(-50%); }
+.lx .lx-stitch--center { margin-inline: auto; }
+.lx .lx-sep {
+  height: 2px;
+  background-image: repeating-linear-gradient(90deg,
+    var(--stitch) 0 7px, transparent 7px 15px);
 }
 @media (prefers-reduced-motion: reduce) {
-  .lx-marquee-track { animation: none; }
   .lx-hero-bg img { animation: none; transform: none; }
 }
 
@@ -283,6 +280,12 @@ body.admin-bar .lx-header { top: 32px; }
 .lx-intro-link:hover { border-color: var(--cognac); }
 .lx-intro-link span { transition: transform .3s; }
 .lx-intro-link:hover span { transform: translateX(6px); }
+.lx-arrow {
+  display: block;
+  width: 230px; height: 100px;
+  margin: 18px 0 0 44px;
+  overflow: visible;
+}
 .lx-intro-img {
   position: relative;
   aspect-ratio: 4 / 5;
@@ -374,10 +377,10 @@ body.admin-bar .lx-header { top: 32px; }
   gap: clamp(20px, 4vw, 60px);
   align-items: baseline;
   padding: clamp(28px, 4vh, 42px) 0;
-  border-top: 1px solid var(--hair);
+  border-top: 2px dashed rgba(110,92,70,.55);
   transition: padding-left .4s cubic-bezier(.22,1,.36,1);
 }
-.lx-maat-list li:last-child { border-bottom: 1px solid var(--hair); }
+.lx-maat-list li:last-child { border-bottom: 2px dashed rgba(110,92,70,.55); }
 .lx-maat-list li:hover { padding-left: 18px; }
 .lx-maat-list li::before {
   content: "0" counter(lxmaat);
@@ -480,7 +483,7 @@ body.admin-bar .lx-header { top: 32px; }
 }
 
 .lx-press {
-  padding-bottom: clamp(100px, 15vh, 180px);
+  padding: clamp(80px, 12vh, 150px) 0 clamp(100px, 15vh, 180px);
 }
 .lx-press .lx-label { display: block; text-align: center; }
 .lx-press-grid {
@@ -543,7 +546,6 @@ body.admin-bar .lx-header { top: 32px; }
 }
 
 .lx-contact {
-  border-top: 1px solid var(--hair);
   padding: clamp(100px, 15vh, 180px) 0;
   background: var(--night2);
 }
@@ -668,7 +670,6 @@ body.admin-bar .lx-header { top: 32px; }
 }
 
 .lx-footer {
-  border-top: 1px solid var(--hair);
   padding: clamp(50px, 8vh, 80px) 0 36px;
 }
 .lx-footer-top {
@@ -773,23 +774,32 @@ html { scroll-behavior: smooth; }
     <div class="lx-scroll-hint" aria-hidden="true"></div>
   </section>
 
-  <div class="lx-marquee" aria-hidden="true">
-    <div class="lx-marquee-track" id="lx-marquee-track">
-      <span>Handgemaakt <b>·</b> Op maat <b>·</b> Traditioneel gereedschap <b>·</b> Sinds generaties <b>·</b> West-Vlaanderen <b>·</b></span><span>Handgemaakt <b>·</b> Op maat <b>·</b> Traditioneel gereedschap <b>·</b> Sinds generaties <b>·</b> West-Vlaanderen <b>·</b></span>
-    </div>
-  </div>
+  <div class="lx-sep"></div>
 
   <section class="lx-intro" id="verhaal">
     <div class="lx-w lx-intro-grid">
       <div class="lx-anim">
         <p class="lx-label">Het verhaal</p>
         <h2>Generaties vol <em>vakmanschap</em></h2>
+        <hr class="lx-stitch">
         <p class="t">
           Luc kreeg het leerbewerken <strong>van thuis uit</strong> mee, maakte er met
           Off Way jarenlang zijn beroep van en staat vandaag, op zijn 76ste,
           nog steeds in zijn atelier. Met de hand, met traditioneel gereedschap
           en met alle tijd die een stuk nodig heeft.
         </p>
+        <svg class="lx-arrow" id="lx-arrow" viewBox="0 0 230 100" aria-hidden="true">
+          <defs>
+            <mask id="lxArrowMask">
+              <path id="lx-arrow-reveal" d="M214 8 C 130 -8, 44 14, 92 44 C 132 68, 66 60, 46 88" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+            </mask>
+          </defs>
+          <path id="lx-arrow-path" d="M214 8 C 130 -8, 44 14, 92 44 C 132 68, 66 60, 46 88" fill="none" stroke="rgba(201,139,78,.7)" stroke-width="2" stroke-dasharray="8 6" mask="url(#lxArrowMask)"/>
+          <g id="lx-arrow-needle" opacity="0">
+            <path d="M0 0 L-18 3.1 L-58 3.4 Q-72 3.4 -72 0 Q-72 -3.4 -58 -3.4 L-18 -3.1 Z" fill="#b09877"/>
+            <ellipse cx="-60" cy="0" rx="5.5" ry="1.7" fill="#16110d"/>
+          </g>
+        </svg>
         <a class="lx-intro-link" href="/over-luc/">Lees het volledige verhaal <span aria-hidden="true">&rarr;</span></a>
       </div>
       <div class="lx-anim lx-anim-d1">
@@ -813,6 +823,7 @@ html { scroll-behavior: smooth; }
         <div>
           <p class="lx-label">Handwerk, op vraag</p>
           <h2>Alles <em>op maat.</em></h2>
+          <hr class="lx-stitch">
         </div>
         <p>
           Luc werkt niet op voorraad en niet in serie. Elk stuk vertrekt van een
@@ -848,6 +859,7 @@ html { scroll-behavior: smooth; }
     <div class="lx-w">
       <figure>
         <p class="lx-label lx-anim">Luc Depuydt</p>
+        <hr class="lx-stitch lx-stitch--center lx-anim lx-anim-d1">
         <blockquote class="lx-anim lx-anim-d1">
           &ldquo;Van vader op zoon heb ik altijd met leder gewerkt.
           <strong>Ik maakte er mijn beroep van.</strong>&rdquo;
@@ -864,6 +876,7 @@ html { scroll-behavior: smooth; }
       <div class="lx-anim lx-anim-d1">
         <p class="lx-label">Luc in actie</p>
         <h2>Te gast in <em>Watou,</em> tussen de kunstenaars</h2>
+        <hr class="lx-stitch">
         <p class="t">
           Tijdens de kunstzomer vind je het Ambachtelijk Leder Atelier in het
           kunstdorp Watou, waar Luc zijn handgemaakte creaties toont naast het werk
@@ -874,6 +887,8 @@ html { scroll-behavior: smooth; }
       </div>
     </div>
   </section>
+
+  <div class="lx-sep"></div>
 
   <section class="lx-press" id="pers">
     <div class="lx-w">
@@ -900,6 +915,7 @@ html { scroll-behavior: smooth; }
       <div class="lx-anim">
         <p class="lx-label">Contact</p>
         <h2>Iets op maat <em>in gedachten?</em></h2>
+        <hr class="lx-stitch">
         <p class="lx-contact-intro">
           Dit is geen webshop, en dat is bewust. Wilt u een stuk op maat laten
           maken, het atelier bezoeken of gewoon eens komen kijken? Neem contact
@@ -929,6 +945,8 @@ html { scroll-behavior: smooth; }
       </div>
     </div>
   </section>
+
+  <div class="lx-sep"></div>
 
   <footer class="lx-footer">
     <div class="lx-w">
@@ -1008,6 +1026,46 @@ html { scroll-behavior: smooth; }
     lb.addEventListener('touchend', function(e){
       if (e.changedTouches[0].clientY - touchY > 60) lbShut();
     }, { passive: true });
+  })();
+
+  (function(){
+    var svg = document.getElementById('lx-arrow');
+    if (!svg) return;
+    var reveal = document.getElementById('lx-arrow-reveal');
+    var needle = document.getElementById('lx-arrow-needle');
+    var L = reveal.getTotalLength();
+    reveal.style.strokeDasharray = L + ' ' + L;
+    reveal.style.strokeDashoffset = L;
+    function setNeedle(t){
+      var pt  = reveal.getPointAtLength(L * t);
+      var pt2 = reveal.getPointAtLength(Math.max(0, L * t - 2));
+      var ang = Math.atan2(pt.y - pt2.y, pt.x - pt2.x) * 180 / Math.PI;
+      needle.setAttribute('transform', 'translate(' + pt.x + ',' + pt.y + ') rotate(' + ang + ') scale(.5)');
+      needle.setAttribute('opacity', '1');
+    }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      reveal.style.strokeDashoffset = 0;
+      setNeedle(1);
+      return;
+    }
+    var played = false;
+    function draw(){
+      if (played) return;
+      played = true;
+      var t0 = null, dur = 1700;
+      function frame(ts){
+        if (!t0) t0 = ts;
+        var pr = Math.min(1, (ts - t0) / dur);
+        var e = 1 - Math.pow(1 - pr, 3);
+        reveal.style.strokeDashoffset = L * (1 - e);
+        setNeedle(e);
+        if (pr < 1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+    new IntersectionObserver(function(entries, io){
+      if (entries[0].isIntersecting) { draw(); io.disconnect(); }
+    }, { threshold: .6 }).observe(svg);
   })();
 })();
 </script>
