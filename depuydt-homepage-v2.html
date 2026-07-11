@@ -1,0 +1,1013 @@
+<style>
+.wp-site-blocks,
+.wp-site-blocks > *,
+.wp-block-post-content,
+.wp-block-post-content > *,
+.is-root-container,
+.is-root-container > *,
+.entry-content, .post-content, .page-content,
+.wp-block-group, article.post, article.page {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+body.admin-bar .lx-header { top: 32px; }
+@media screen and (max-width: 782px) {
+  body.admin-bar .lx-header { top: 46px; }
+}
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Archivo:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+.lx {
+  --night:   #16110d;
+  --night2:  #1e1812;
+  --bone:    #ece5da;
+  --bone-dim: rgba(236,229,218,.62);
+  --cognac:  #c98b4e;
+  --cognac-deep: #9a6132;
+  --hair:    rgba(236,229,218,.14);
+  font-family: 'Archivo', Helvetica, Arial, sans-serif;
+  background: var(--night);
+  color: var(--bone);
+  -webkit-font-smoothing: antialiased;
+}
+.lx *, .lx *::before, .lx *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.lx a { text-decoration: none; color: inherit; }
+.lx img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.lx .lx-w { max-width: 1320px; margin-inline: auto; padding-inline: clamp(20px, 4vw, 56px); }
+.lx .lx-serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+
+.lx .lx-label {
+  font-size: 11px;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  color: var(--cognac);
+  font-weight: 500;
+}
+
+.lx-anim {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1);
+}
+.lx-anim.in { opacity: 1; transform: translateY(0); }
+.lx-anim-d1 { transition-delay: .15s; }
+.lx-anim-d2 { transition-delay: .3s; }
+.lx-anim-d3 { transition-delay: .45s; }
+
+.lx-header {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 9999;
+  height: 72px;
+  display: flex; align-items: center;
+  background: linear-gradient(180deg, rgba(22,17,13,.92), rgba(22,17,13,.75));
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--hair);
+}
+.lx-header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%;
+  max-width: 1320px; margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 56px);
+}
+.lx-brand {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: .04em;
+}
+.lx-brand em { font-style: italic; color: var(--cognac); }
+.lx-nav { display: flex; gap: 36px; }
+.lx-nav a {
+  font-size: 12px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  transition: color .3s;
+}
+.lx-nav a:hover { color: var(--cognac); }
+
+.lx-burger {
+  display: none;
+  flex-direction: column; justify-content: center; gap: 5px;
+  width: 42px; height: 42px; padding: 9px; margin-right: -9px;
+  background: none; border: none; cursor: pointer;
+}
+.lx-burger span {
+  display: block; width: 100%; height: 2px; background: var(--bone);
+  transition: transform .3s ease, opacity .3s ease;
+}
+.lx-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.lx-burger.open span:nth-child(2) { opacity: 0; }
+.lx-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 720px) {
+  .lx-burger { display: flex; }
+  .lx-nav {
+    position: fixed; top: 72px; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    padding: 6px clamp(20px, 4vw, 56px) 18px;
+    background: rgba(22,17,13,.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--hair);
+    transform: translateY(-14px); opacity: 0; pointer-events: none;
+    transition: opacity .28s ease, transform .28s ease;
+  }
+  .lx-nav.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .lx-nav a {
+    font-size: 14px; padding: 16px 2px;
+    border-top: 1px solid var(--hair); color: var(--bone);
+  }
+  .lx-nav a:first-child { border-top: none; }
+}
+
+.lx-hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex; align-items: flex-end;
+  isolation: isolate;
+  overflow: hidden;
+}
+.lx-hero-bg {
+  position: absolute; inset: 0; z-index: -2;
+}
+.lx-hero-bg img {
+  filter: grayscale(.4) brightness(.62) contrast(1.05);
+  transform: scale(1.06);
+  animation: lxHeroDrift 18s ease-out forwards;
+}
+@keyframes lxHeroDrift {
+  to { transform: scale(1); }
+}
+.lx-hero::after {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(22,17,13,.55) 0%, rgba(22,17,13,.15) 40%, rgba(22,17,13,.88) 100%);
+}
+.lx-hero-content {
+  width: 100%;
+  padding-bottom: clamp(56px, 10vh, 120px);
+  padding-top: 140px;
+}
+.lx-hero h1 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(52px, 9vw, 130px);
+  font-weight: 300;
+  line-height: .98;
+  letter-spacing: -.01em;
+  max-width: 11ch;
+}
+.lx-hero h1 em { font-style: italic; color: var(--cognac); }
+.lx-hero-row {
+  margin-top: clamp(30px, 5vh, 50px);
+  display: flex; flex-wrap: wrap; gap: 30px;
+  align-items: flex-end; justify-content: space-between;
+}
+.lx-hero-sub {
+  font-size: clamp(15px, 1.6vw, 17px);
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--bone-dim);
+  max-width: 44ch;
+}
+.lx-hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.lx-scroll-hint {
+  position: absolute; bottom: 26px; left: 50%;
+  transform: translateX(-50%);
+  width: 1px; height: 52px;
+  overflow: hidden;
+}
+.lx-scroll-hint::after {
+  content: "";
+  position: absolute; top: -52px; left: 0;
+  width: 1px; height: 52px;
+  background: linear-gradient(180deg, transparent, var(--cognac));
+  animation: lxDrop 2.2s ease-in-out infinite;
+}
+@keyframes lxDrop {
+  60% { top: 52px; }
+  100% { top: 52px; }
+}
+
+.lx-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: 'Archivo', Helvetica, sans-serif;
+  font-size: 12px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 16px 36px;
+  border: 1px solid var(--bone);
+  color: var(--bone);
+  background: transparent;
+  transition: background .3s, color .3s, border-color .3s;
+  cursor: pointer;
+}
+.lx-btn:hover { background: var(--bone); color: var(--night); }
+.lx .lx-btn--solid { background: var(--cognac); border-color: var(--cognac); color: var(--night); }
+.lx .lx-btn--solid:hover { background: var(--bone); border-color: var(--bone); }
+
+.lx-marquee {
+  border-top: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+  padding: 22px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.lx-marquee-track {
+  display: inline-block;
+  animation: lxMarquee 40s linear infinite;
+}
+.lx-marquee span {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(18px, 2.4vw, 26px);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--bone-dim);
+  padding-inline: 34px;
+}
+.lx-marquee b {
+  color: var(--cognac);
+  font-weight: 400;
+}
+@keyframes lxMarquee {
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lx-marquee-track { animation: none; }
+  .lx-hero-bg img { animation: none; transform: none; }
+}
+
+.lx-intro {
+  padding: clamp(100px, 16vh, 190px) 0;
+}
+.lx-intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 7vw, 110px);
+  align-items: center;
+}
+.lx-intro h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(36px, 4.6vw, 64px);
+  font-weight: 300;
+  line-height: 1.06;
+  margin-top: 22px;
+}
+.lx-intro h2 em { font-style: italic; color: var(--cognac); }
+.lx-intro p.t {
+  margin-top: 26px;
+  font-size: 15.5px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--bone-dim);
+  max-width: 50ch;
+}
+.lx-intro p.t strong { font-weight: 500; color: var(--bone); }
+.lx-intro-link {
+  display: inline-flex; align-items: center; gap: 12px;
+  margin-top: 34px;
+  font-size: 12px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--cognac);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 6px;
+  transition: border-color .3s;
+}
+.lx-intro-link:hover { border-color: var(--cognac); }
+.lx-intro-link span { transition: transform .3s; }
+.lx-intro-link:hover span { transform: translateX(6px); }
+.lx-intro-img {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+.lx-intro-img img {
+  filter: grayscale(1) brightness(.92) contrast(1.06);
+  transition: transform 1.6s cubic-bezier(.22,1,.36,1), filter .8s;
+}
+.lx-intro-img:hover img { transform: scale(1.04); filter: grayscale(.3) brightness(.95) contrast(1.04); }
+.lx-intro-img::after {
+  content: "76";
+  position: absolute; right: -8px; bottom: -30px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(120px, 16vw, 230px);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(201,139,78,.5);
+  pointer-events: none;
+}
+.lx-intro-cap {
+  margin-top: 16px;
+  font-size: 12px;
+  letter-spacing: .1em;
+  color: var(--bone-dim);
+  font-style: italic;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 15px;
+}
+@media (max-width: 860px) {
+  .lx-intro-grid { grid-template-columns: 1fr; gap: 44px; }
+}
+
+.lx-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.lx-strip .ph {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  position: relative;
+}
+.lx-strip .ph img {
+  filter: grayscale(.5) brightness(.8);
+  transition: filter .6s, transform 1.4s cubic-bezier(.22,1,.36,1);
+  cursor: zoom-in;
+}
+.lx-strip .ph:hover img {
+  filter: grayscale(0) brightness(.95);
+  transform: scale(1.05);
+}
+@media (max-width: 720px) {
+  .lx-strip { grid-template-columns: 1fr; }
+  .lx-strip .ph { aspect-ratio: 16 / 10; }
+}
+
+.lx-maat {
+  padding: clamp(100px, 16vh, 190px) 0;
+  background: var(--night2);
+}
+.lx-maat-head {
+  display: flex; flex-wrap: wrap; gap: 26px;
+  align-items: flex-end; justify-content: space-between;
+  margin-bottom: clamp(50px, 8vh, 90px);
+}
+.lx-maat-head h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(38px, 5vw, 72px);
+  font-weight: 300;
+  line-height: 1.02;
+  margin-top: 22px;
+}
+.lx-maat-head h2 em { font-style: italic; color: var(--cognac); }
+.lx-maat-head p {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--bone-dim);
+  max-width: 42ch;
+}
+.lx-maat-list { list-style: none; counter-reset: lxmaat; }
+.lx-maat-list li {
+  counter-increment: lxmaat;
+  display: grid;
+  grid-template-columns: 90px 1fr 1.2fr;
+  gap: clamp(20px, 4vw, 60px);
+  align-items: baseline;
+  padding: clamp(28px, 4vh, 42px) 0;
+  border-top: 1px solid var(--hair);
+  transition: padding-left .4s cubic-bezier(.22,1,.36,1);
+}
+.lx-maat-list li:last-child { border-bottom: 1px solid var(--hair); }
+.lx-maat-list li:hover { padding-left: 18px; }
+.lx-maat-list li::before {
+  content: "0" counter(lxmaat);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(26px, 3vw, 40px);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--cognac);
+}
+.lx-maat-list h3 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(24px, 2.8vw, 36px);
+  font-weight: 400;
+  line-height: 1.15;
+}
+.lx-maat-list p {
+  font-size: 14.5px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--bone-dim);
+}
+@media (max-width: 860px) {
+  .lx-maat-list li { grid-template-columns: 60px 1fr; }
+  .lx-maat-list p { grid-column: 2; }
+}
+
+.lx-quote {
+  position: relative;
+  padding: clamp(120px, 20vh, 220px) 0;
+  isolation: isolate;
+  text-align: center;
+  overflow: hidden;
+}
+.lx-quote-bg { position: absolute; inset: 0; z-index: -2; }
+.lx-quote-bg img {
+  filter: grayscale(.6) brightness(.4);
+}
+.lx-quote::after {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background: radial-gradient(ellipse at center, rgba(22,17,13,.25), rgba(22,17,13,.82));
+}
+.lx-quote blockquote {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(30px, 5vw, 60px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.28;
+  max-width: 22ch;
+  margin: 30px auto 0;
+}
+.lx-quote blockquote strong {
+  font-weight: 400; font-style: normal; color: var(--cognac);
+}
+.lx-quote figcaption {
+  margin-top: 34px;
+  font-size: 11px;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+}
+
+.lx-watou {
+  padding: clamp(100px, 15vh, 180px) 0;
+}
+.lx-watou-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 7vw, 110px);
+  align-items: center;
+}
+.lx-watou-img {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+.lx-watou-img img {
+  filter: grayscale(.4) brightness(.85);
+  transition: transform 1.6s cubic-bezier(.22,1,.36,1);
+}
+.lx-watou-img:hover img { transform: scale(1.04); }
+.lx-watou h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(36px, 4.6vw, 64px);
+  font-weight: 300;
+  line-height: 1.06;
+  margin-top: 22px;
+}
+.lx-watou h2 em { font-style: italic; color: var(--cognac); }
+.lx-watou p.t {
+  margin-top: 26px;
+  font-size: 15.5px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--bone-dim);
+  max-width: 48ch;
+}
+@media (max-width: 860px) {
+  .lx-watou-grid { grid-template-columns: 1fr; gap: 44px; }
+  .lx-watou-img { order: 1; }
+}
+
+.lx-press {
+  padding-bottom: clamp(100px, 15vh, 180px);
+}
+.lx-press .lx-label { display: block; text-align: center; }
+.lx-press-grid {
+  margin-top: clamp(40px, 6vh, 64px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  max-width: 1000px;
+  margin-inline: auto;
+}
+.lx-press-card {
+  position: relative;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  aspect-ratio: 16 / 11;
+  overflow: hidden;
+  isolation: isolate;
+  padding: clamp(24px, 3vw, 38px);
+}
+.lx-press-card img {
+  position: absolute; inset: 0; z-index: -2;
+  filter: grayscale(.5) brightness(.5);
+  transition: transform 1.4s cubic-bezier(.22,1,.36,1), filter .6s;
+}
+.lx-press-card::after {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, transparent 30%, rgba(22,17,13,.9));
+}
+.lx-press-card:hover img {
+  transform: scale(1.05);
+  filter: grayscale(.1) brightness(.6);
+}
+.lx-press-src {
+  font-size: 10px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--cognac);
+}
+.lx-press-card h3 {
+  margin-top: 12px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(20px, 2.2vw, 27px);
+  font-weight: 400;
+  line-height: 1.25;
+  max-width: 30ch;
+}
+.lx-press-more {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 16px;
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.lx-press-more span { transition: transform .3s; }
+.lx-press-card:hover .lx-press-more span { transform: translateX(6px); }
+.lx-press-card:hover .lx-press-more { color: var(--bone); }
+@media (max-width: 720px) {
+  .lx-press-grid { grid-template-columns: 1fr; }
+}
+
+.lx-contact {
+  border-top: 1px solid var(--hair);
+  padding: clamp(100px, 15vh, 180px) 0;
+  background: var(--night2);
+}
+.lx-contact-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(44px, 7vw, 110px);
+  align-items: start;
+}
+.lx-contact h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(40px, 5.4vw, 78px);
+  font-weight: 300;
+  line-height: 1.02;
+  margin-top: 22px;
+}
+.lx-contact h2 em { font-style: italic; color: var(--cognac); }
+.lx-contact-intro {
+  margin-top: 26px;
+  font-size: 15.5px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--bone-dim);
+  max-width: 46ch;
+}
+.lx-contact-info {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px 40px;
+}
+.lx-contact-info .k {
+  display: block;
+  font-size: 10px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--cognac);
+}
+.lx-contact-info .v {
+  display: block;
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--bone);
+}
+.lx-contact-info a.v { transition: color .3s; }
+.lx-contact-info a.v:hover { color: var(--cognac); }
+@media (max-width: 860px) {
+  .lx-contact-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .lx-contact-info { grid-template-columns: 1fr; }
+}
+
+.lx .forminator-custom-form,
+.lx .forminator-ui.forminator-custom-form {
+  font-family: 'Archivo', Helvetica, sans-serif !important;
+}
+.lx .forminator-custom-form .forminator-label,
+.lx .forminator-custom-form label {
+  font-family: 'Archivo', Helvetica, sans-serif !important;
+  font-size: 10px !important;
+  letter-spacing: .3em !important;
+  text-transform: uppercase !important;
+  color: var(--cognac) !important;
+  font-weight: 500 !important;
+}
+.lx .forminator-custom-form .forminator-input,
+.lx .forminator-custom-form .forminator-textarea,
+.lx .forminator-custom-form input[type="text"],
+.lx .forminator-custom-form input[type="email"],
+.lx .forminator-custom-form input[type="tel"],
+.lx .forminator-custom-form textarea {
+  font-family: 'Archivo', Helvetica, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 300 !important;
+  color: var(--bone) !important;
+  background: rgba(236,229,218,.05) !important;
+  border: 1px solid rgba(236,229,218,.25) !important;
+  border-radius: 0 !important;
+  padding: 13px 15px !important;
+  box-shadow: none !important;
+  transition: border-color .3s !important;
+}
+.lx .forminator-custom-form .forminator-input:focus,
+.lx .forminator-custom-form .forminator-textarea:focus,
+.lx .forminator-custom-form input:focus,
+.lx .forminator-custom-form textarea:focus {
+  border-color: var(--cognac) !important;
+  outline: none !important;
+  background: rgba(236,229,218,.08) !important;
+}
+.lx .forminator-custom-form ::placeholder {
+  color: rgba(236,229,218,.35) !important;
+  opacity: 1 !important;
+}
+.lx .forminator-custom-form .forminator-button,
+.lx .forminator-custom-form .forminator-button-submit,
+.lx .forminator-custom-form button[type="submit"] {
+  font-family: 'Archivo', Helvetica, sans-serif !important;
+  font-size: 12px !important;
+  letter-spacing: .24em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  color: var(--night) !important;
+  background: var(--cognac) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 16px 36px !important;
+  cursor: pointer !important;
+  transition: background .3s !important;
+}
+.lx .forminator-custom-form .forminator-button:hover,
+.lx .forminator-custom-form .forminator-button-submit:hover,
+.lx .forminator-custom-form button[type="submit"]:hover {
+  background: var(--bone) !important;
+}
+.lx .forminator-custom-form .forminator-response-message.forminator-success,
+.lx .forminator-custom-form .forminator-response-message.forminator-success p {
+  color: var(--cognac) !important;
+}
+
+.lx-footer {
+  border-top: 1px solid var(--hair);
+  padding: clamp(50px, 8vh, 80px) 0 36px;
+}
+.lx-footer-top {
+  display: flex; flex-wrap: wrap; gap: 30px;
+  align-items: baseline; justify-content: space-between;
+}
+.lx-footer-brand {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 300;
+}
+.lx-footer-brand em { font-style: italic; color: var(--cognac); }
+.lx-footer-nav { display: flex; flex-wrap: wrap; gap: 26px; }
+.lx-footer-nav a {
+  font-size: 11px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  transition: color .3s;
+}
+.lx-footer-nav a:hover { color: var(--cognac); }
+.lx-footer-bottom {
+  margin-top: clamp(36px, 5vh, 56px);
+  padding-top: 24px;
+  border-top: 1px solid var(--hair);
+  display: flex; flex-wrap: wrap; gap: 12px;
+  justify-content: space-between;
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(236,229,218,.4);
+}
+
+.lx-lb {
+  position: fixed; inset: 0;
+  z-index: 10000;
+  display: none;
+  align-items: center; justify-content: center;
+  background: rgba(10,7,5,.95);
+  padding: 4vmin;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.lx-lb.open { display: flex; }
+.lx-lb.visible { opacity: 1; }
+.lx-lb img {
+  max-width: 92vw; max-height: 88vh;
+  width: auto; height: auto;
+  object-fit: contain;
+  box-shadow: 0 30px 80px rgba(0,0,0,.6);
+}
+.lx-lb-close {
+  position: absolute; top: 18px; right: 22px;
+  width: 44px; height: 44px;
+  background: none; border: none;
+  color: rgba(236,229,218,.8);
+  font-size: 30px; line-height: 1;
+  cursor: pointer;
+  transition: color .3s;
+}
+.lx-lb-close:hover { color: #fff; }
+
+.lx [id] { scroll-margin-top: 88px; }
+html { scroll-behavior: smooth; }
+</style>
+
+<div class="lx">
+
+  <header class="lx-header" id="lx-header">
+    <div class="lx-header-inner">
+      <a href="#lx-top" class="lx-brand">Atelier <em>Depuydt</em></a>
+      <nav class="lx-nav" id="lx-nav">
+        <a href="/over-luc/">Over Luc</a>
+        <a href="/galerij/">Galerij</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+      <button class="lx-burger" id="lx-burger" type="button" aria-label="Menu openen" aria-expanded="false" aria-controls="lx-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <section class="lx-hero" id="lx-top">
+    <div class="lx-hero-bg">
+      <img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4458-scaled.jpg" alt="Luc Depuydt aan het werk in zijn atelier">
+    </div>
+    <div class="lx-w lx-hero-content">
+      <p class="lx-label lx-anim in">Ambachtelijk Leder Atelier — Watou</p>
+      <h1 class="lx-anim in lx-anim-d1" style="margin-top:22px;">Leder, getekend <em>door ambacht.</em></h1>
+      <div class="lx-hero-row lx-anim in lx-anim-d2">
+        <p class="lx-hero-sub">
+          Luc Depuydt bewerkt het leder nog met de hand, met traditioneel
+          gereedschap en respect voor de huid. Elk stuk op maat,
+          gemaakt om generaties mee te gaan.
+        </p>
+        <div class="lx-hero-actions">
+          <a class="lx-btn lx-btn--solid" href="/contact/">Contact</a>
+          <a class="lx-btn" href="/over-luc/">Over Luc</a>
+        </div>
+      </div>
+    </div>
+    <div class="lx-scroll-hint" aria-hidden="true"></div>
+  </section>
+
+  <div class="lx-marquee" aria-hidden="true">
+    <div class="lx-marquee-track" id="lx-marquee-track">
+      <span>Handgemaakt <b>·</b> Op maat <b>·</b> Traditioneel gereedschap <b>·</b> Sinds generaties <b>·</b> West-Vlaanderen <b>·</b></span><span>Handgemaakt <b>·</b> Op maat <b>·</b> Traditioneel gereedschap <b>·</b> Sinds generaties <b>·</b> West-Vlaanderen <b>·</b></span>
+    </div>
+  </div>
+
+  <section class="lx-intro" id="verhaal">
+    <div class="lx-w lx-intro-grid">
+      <div class="lx-anim">
+        <p class="lx-label">Het verhaal</p>
+        <h2>Generaties vol <em>vakmanschap</em></h2>
+        <p class="t">
+          Luc kreeg het leerbewerken <strong>van thuis uit</strong> mee, maakte er met
+          Off Way jarenlang zijn beroep van en staat vandaag, op zijn 76ste,
+          nog steeds in zijn atelier. Met de hand, met traditioneel gereedschap
+          en met alle tijd die een stuk nodig heeft.
+        </p>
+        <a class="lx-intro-link" href="/over-luc/">Lees het volledige verhaal <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="lx-anim lx-anim-d1">
+        <div class="lx-intro-img">
+          <img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4502-scaled.jpg" alt="Luc Depuydt in zijn lederatelier" loading="lazy">
+        </div>
+        <p class="lx-intro-cap">Luc Depuydt, een leven in leder</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="lx-strip">
+    <div class="ph lx-anim"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4309-scaled.jpg" alt="Traditioneel gereedschap in het atelier" loading="lazy"></div>
+    <div class="ph lx-anim lx-anim-d1"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4429-scaled.jpg" alt="Detail van handgemaakt lederwerk" loading="lazy"></div>
+    <div class="ph lx-anim lx-anim-d2"><img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4368-scaled.jpg" alt="Het atelier van Luc Depuydt" loading="lazy"></div>
+  </div>
+
+  <section class="lx-maat" id="opmaat">
+    <div class="lx-w">
+      <div class="lx-maat-head lx-anim">
+        <div>
+          <p class="lx-label">Handwerk, op vraag</p>
+          <h2>Alles <em>op maat.</em></h2>
+        </div>
+        <p>
+          Luc werkt niet op voorraad en niet in serie. Elk stuk vertrekt van een
+          vraag, een idee of een huid, en wordt van begin tot einde met de hand
+          gemaakt.
+        </p>
+      </div>
+      <ul class="lx-maat-list">
+        <li class="lx-anim">
+          <h3>Handtassen &amp; lederwaren</h3>
+          <p>Exclusieve, handgemaakte tassen en kleinlederwaren, ontworpen en gemaakt volgens uw wens.</p>
+        </li>
+        <li class="lx-anim">
+          <h3>Kleinmeubels in leder</h3>
+          <p>Unieke stukken waarin leder en meubel samenkomen.</p>
+        </li>
+        <li class="lx-anim">
+          <h3>Uniek maatwerk</h3>
+          <p>Een bijzonder idee of een stuk dat nergens te vinden is? Dat is precies waar het ambacht begint.</p>
+        </li>
+        <li class="lx-anim">
+          <h3>Herstel &amp; restauratie</h3>
+          <p>Versleten of beschadigd lederwerk krijgt in het atelier een tweede leven, met respect voor het origineel.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="lx-quote">
+    <div class="lx-quote-bg">
+      <img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4424-scaled.jpg" alt="" loading="lazy" aria-hidden="true">
+    </div>
+    <div class="lx-w">
+      <figure>
+        <p class="lx-label lx-anim">Luc Depuydt</p>
+        <blockquote class="lx-anim lx-anim-d1">
+          &ldquo;Van vader op zoon heb ik altijd met leder gewerkt.
+          <strong>Ik maakte er mijn beroep van.</strong>&rdquo;
+        </blockquote>
+      </figure>
+    </div>
+  </section>
+
+  <section class="lx-watou">
+    <div class="lx-w lx-watou-grid">
+      <div class="lx-watou-img lx-anim">
+        <img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/8A7A4702-scaled.jpg" alt="Luc Depuydt in de deuropening van zijn lederatelier" loading="lazy">
+      </div>
+      <div class="lx-anim lx-anim-d1">
+        <p class="lx-label">Luc in actie</p>
+        <h2>Te gast in <em>Watou,</em> tussen de kunstenaars</h2>
+        <p class="t">
+          Tijdens de kunstzomer vind je het Ambachtelijk Leder Atelier in het
+          kunstdorp Watou, waar Luc zijn handgemaakte creaties toont naast het werk
+          van bevriende kunstenaars. Kom gerust binnen, bekijk het werk en spreek
+          hem aan. Daar is het atelier voor.
+        </p>
+        <a class="lx-btn" href="/galerij/" style="margin-top:34px;">Bekijk de galerij</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="lx-press" id="pers">
+    <div class="lx-w">
+      <p class="lx-label lx-anim">Luc in de krant</p>
+      <div class="lx-press-grid">
+        <a class="lx-press-card lx-anim" href="https://kw.be/nieuws/cultuur/luc-depuydt-en-bruno-deman-stellen-tentoon-op-kleine-markt-tijdens-kunstzomer-van-watou/" target="_blank" rel="noopener">
+          <img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/4564789.webp" alt="Krantenartikel over Luc Depuydt en Bruno Deman tijdens de kunstzomer van Watou" loading="lazy">
+          <span class="lx-press-src">Krant van West-Vlaanderen</span>
+          <h3>Luc Depuydt en Bruno Deman stellen tentoon op de Kleine Markt tijdens de kunstzomer van Watou</h3>
+          <span class="lx-press-more">Lees het artikel <span aria-hidden="true">&rarr;</span></span>
+        </a>
+        <a class="lx-press-card lx-anim lx-anim-d1" href="https://kw.be/nieuws/samenleving/ode-aan-het-ambacht-luc-depuydt-en-masoud-razavi-stellen-tentoon/" target="_blank" rel="noopener">
+          <img src="https://goldenrod-chough-132753.hostingersite.com/wp-content/uploads/2026/07/5339328.webp" alt="Krantenartikel: ode aan het ambacht, Luc Depuydt en Masoud Razavi stellen tentoon" loading="lazy">
+          <span class="lx-press-src">Krant van West-Vlaanderen</span>
+          <h3>Ode aan het ambacht: Luc Depuydt en Masoud Razavi stellen tentoon</h3>
+          <span class="lx-press-more">Lees het artikel <span aria-hidden="true">&rarr;</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="lx-contact" id="contact">
+    <div class="lx-w lx-contact-grid">
+      <div class="lx-anim">
+        <p class="lx-label">Contact</p>
+        <h2>Iets op maat <em>in gedachten?</em></h2>
+        <p class="lx-contact-intro">
+          Dit is geen webshop, en dat is bewust. Wilt u een stuk op maat laten
+          maken, het atelier bezoeken of gewoon eens komen kijken? Neem contact
+          op of spring binnen tijdens de openingsmomenten.
+        </p>
+        <div class="lx-contact-info">
+          <div>
+            <span class="k">Telefoon</span>
+            <a class="v" href="tel:+32478444589">+32&nbsp;478&nbsp;44&nbsp;45&nbsp;89</a>
+          </div>
+          <div>
+            <span class="k">E-mail</span>
+            <a class="v" href="mailto:luc.depuydt1@gmail.com">luc.depuydt1@gmail.com</a>
+          </div>
+          <div>
+            <span class="k">Atelier</span>
+            <span class="v">Moenaardestraat 15, 8978 Poperinge, België</span>
+          </div>
+          <div>
+            <span class="k">Volg het atelier</span>
+            <a class="v" href="https://www.facebook.com/p/Ambachtelijk-Leder-Atelier-100063621544625/" target="_blank" rel="noopener">Facebook</a>
+          </div>
+        </div>
+      </div>
+      <div class="lx-anim lx-anim-d1">
+        [forminator_form id="18"]
+      </div>
+    </div>
+  </section>
+
+  <footer class="lx-footer">
+    <div class="lx-w">
+      <div class="lx-footer-top">
+        <span class="lx-footer-brand">Atelier <em>Depuydt</em></span>
+        <nav class="lx-footer-nav">
+          <a href="/over-luc/">Over Luc</a>
+          <a href="/galerij/">Galerij</a>
+          <a href="/contact/">Contact</a>
+          <a href="https://www.facebook.com/p/Ambachtelijk-Leder-Atelier-100063621544625/" target="_blank" rel="noopener">Facebook</a>
+        </nav>
+      </div>
+      <div class="lx-footer-bottom">
+        <span>&copy; <span id="lx-year">2026</span> Ambachtelijk Leder Atelier Depuydt</span>
+        <span>Handgemaakt in West-Vlaanderen</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="lx-lb" id="lx-lb" role="dialog" aria-modal="true" aria-label="Afbeelding vergroot bekijken">
+    <img id="lx-lb-img" src="" alt="">
+    <button class="lx-lb-close" id="lx-lb-close" type="button" aria-label="Sluiten">&times;</button>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var anims = document.querySelectorAll('.lx-anim');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  anims.forEach(function(el){ io.observe(el); });
+
+  document.getElementById('lx-year').textContent = new Date().getFullYear();
+
+  (function(){
+    var burger = document.getElementById('lx-burger');
+    var nav = document.getElementById('lx-nav');
+    if (!burger || !nav) return;
+    function setOpen(open){
+      nav.classList.toggle('open', open);
+      burger.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    burger.addEventListener('click', function(){ setOpen(!nav.classList.contains('open')); });
+    nav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setOpen(false); }); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') setOpen(false); });
+  })();
+
+  (function(){
+    var lb      = document.getElementById('lx-lb');
+    var lbImg   = document.getElementById('lx-lb-img');
+    var lbClose = document.getElementById('lx-lb-close');
+    if (!lb) return;
+    function lbOpen(src, alt){
+      lbImg.src = src; lbImg.alt = alt || '';
+      lb.classList.add('open');
+      requestAnimationFrame(function(){ lb.classList.add('visible'); });
+      document.body.style.overflow = 'hidden';
+    }
+    function lbShut(){
+      lb.classList.remove('visible');
+      setTimeout(function(){ lb.classList.remove('open'); lbImg.src = ''; }, 300);
+      document.body.style.overflow = '';
+    }
+    document.querySelectorAll('.lx-strip .ph img, .lx-intro-img img, .lx-watou-img img').forEach(function(img){
+      img.addEventListener('click', function(){ lbOpen(img.src, img.alt); });
+    });
+    lb.addEventListener('click', function(e){ if (e.target === lb) lbShut(); });
+    lbClose.addEventListener('click', lbShut);
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && lb.classList.contains('open')) lbShut(); });
+    var touchY = 0;
+    lb.addEventListener('touchstart', function(e){ touchY = e.touches[0].clientY; }, { passive: true });
+    lb.addEventListener('touchend', function(e){
+      if (e.changedTouches[0].clientY - touchY > 60) lbShut();
+    }, { passive: true });
+  })();
+})();
+</script>
